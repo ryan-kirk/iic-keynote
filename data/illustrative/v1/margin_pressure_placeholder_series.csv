@@ -1,0 +1,25 @@
+date,timeGrain,storyId,metricKey,metricLabel,value,unit,sourceType,sourceName,notes
+2024-01-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,92,index,illustrative,Phase 2 synthetic series,Baseline margin pressure before spring booking tightens.
+2024-01-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,108,index,illustrative,Phase 2 synthetic series,Forward booking remains above baseline when crop price optimism is stronger.
+2024-02-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,95,index,illustrative,Phase 2 synthetic series,Input cost concern starts to rise.
+2024-02-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,106,index,illustrative,Phase 2 synthetic series,Booking softens slightly with higher uncertainty.
+2024-03-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,101,index,illustrative,Phase 2 synthetic series,Combined cost and rate pressure becomes more visible.
+2024-03-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,102,index,illustrative,Phase 2 synthetic series,Bookings begin to lag the seasonal norm.
+2024-04-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,107,index,illustrative,Phase 2 synthetic series,Spring input timing amplifies pressure.
+2024-04-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,98,index,illustrative,Phase 2 synthetic series,Members delay commitments as economics tighten.
+2024-05-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,111,index,illustrative,Phase 2 synthetic series,Pressure rises on softer corn and firmer financing conditions.
+2024-05-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,94,index,illustrative,Phase 2 synthetic series,Bookings fall below baseline.
+2024-06-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,114,index,illustrative,Phase 2 synthetic series,Peak pressure period for the first-release narrative.
+2024-06-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,90,index,illustrative,Phase 2 synthetic series,Lowest booking response in the illustrative cycle.
+2024-07-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,112,index,illustrative,Phase 2 synthetic series,Pressure remains elevated but stabilizes.
+2024-07-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,89,index,illustrative,Phase 2 synthetic series,Lagged response keeps booking muted.
+2024-08-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,109,index,illustrative,Phase 2 synthetic series,Conditions remain watch-worthy rather than crisis-level.
+2024-08-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,91,index,illustrative,Phase 2 synthetic series,Minor recovery begins.
+2024-09-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,105,index,illustrative,Phase 2 synthetic series,Harvest optimism offsets some earlier pressure.
+2024-09-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,95,index,illustrative,Phase 2 synthetic series,Booking activity improves modestly.
+2024-10-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,99,index,illustrative,Phase 2 synthetic series,Pressure falls toward neutral conditions.
+2024-10-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,99,index,illustrative,Phase 2 synthetic series,Booking returns near baseline.
+2024-11-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,97,index,illustrative,Phase 2 synthetic series,Post-harvest environment steadies.
+2024-11-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,101,index,illustrative,Phase 2 synthetic series,Booking rebounds as visibility improves.
+2024-12-01,monthly,margin_pressure,margin_pressure_index,Margin Pressure Index,94,index,illustrative,Phase 2 synthetic series,Year-end conditions normalize.
+2024-12-01,monthly,margin_pressure,booking_behavior_index,Booking Behavior Index,104,index,illustrative,Phase 2 synthetic series,Illustrative series closes above baseline.

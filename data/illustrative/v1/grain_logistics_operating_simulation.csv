@@ -1,0 +1,79 @@
+date,timeGrain,storyId,metricKey,metricLabel,value,unit,sourceType,sourceName,notes
+2024-09-15,daily,grain_logistics,receipts_bu_day,Daily Receipts,8200,bu/day,illustrative,Phase 2 synthetic series,Early harvest flow begins.
+2024-09-15,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,41,minutes,illustrative,Phase 2 synthetic series,Service levels remain near baseline.
+2024-09-15,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,44,percent,illustrative,Phase 2 synthetic series,Storage pressure remains moderate.
+2024-09-16,daily,grain_logistics,receipts_bu_day,Daily Receipts,8600,bu/day,illustrative,Phase 2 synthetic series,Receipts build gradually.
+2024-09-16,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,43,minutes,illustrative,Phase 2 synthetic series,Minor queue growth.
+2024-09-16,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,46,percent,illustrative,Phase 2 synthetic series,Utilization follows receipts higher.
+2024-09-17,daily,grain_logistics,receipts_bu_day,Daily Receipts,9100,bu/day,illustrative,Phase 2 synthetic series,Steady harvest ramp.
+2024-09-17,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,45,minutes,illustrative,Phase 2 synthetic series,Still manageable for members.
+2024-09-17,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,48,percent,illustrative,Phase 2 synthetic series,Capacity remains comfortable.
+2024-09-18,daily,grain_logistics,receipts_bu_day,Daily Receipts,9800,bu/day,illustrative,Phase 2 synthetic series,Throughput increases with dry weather.
+2024-09-18,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,47,minutes,illustrative,Phase 2 synthetic series,Turn time begins to drift upward.
+2024-09-18,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,51,percent,illustrative,Phase 2 synthetic series,Storage curve steepens.
+2024-09-19,daily,grain_logistics,receipts_bu_day,Daily Receipts,10500,bu/day,illustrative,Phase 2 synthetic series,Receipts rise ahead of a wetter window.
+2024-09-19,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,52,minutes,illustrative,Phase 2 synthetic series,Queues start to form.
+2024-09-19,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,54,percent,illustrative,Phase 2 synthetic series,Capacity pressure remains below the watch line.
+2024-09-20,daily,grain_logistics,receipts_bu_day,Daily Receipts,11200,bu/day,illustrative,Phase 2 synthetic series,Higher volume coincides with more drying demand.
+2024-09-20,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,58,minutes,illustrative,Phase 2 synthetic series,Service starts to slow materially.
+2024-09-20,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,58,percent,illustrative,Phase 2 synthetic series,Utilization continues climbing.
+2024-09-21,daily,grain_logistics,receipts_bu_day,Daily Receipts,11800,bu/day,illustrative,Phase 2 synthetic series,Weather-driven compression lifts inbound volume.
+2024-09-21,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,64,minutes,illustrative,Phase 2 synthetic series,Turn time visibly worsens for producers.
+2024-09-21,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,62,percent,illustrative,Phase 2 synthetic series,Drying constraint starts to matter.
+2024-09-22,daily,grain_logistics,receipts_bu_day,Daily Receipts,12600,bu/day,illustrative,Phase 2 synthetic series,Operational peak begins.
+2024-09-22,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,72,minutes,illustrative,Phase 2 synthetic series,Member experience shifts into watch status.
+2024-09-22,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,66,percent,illustrative,Phase 2 synthetic series,Storage and drying pressure converge.
+2024-09-23,daily,grain_logistics,receipts_bu_day,Daily Receipts,13100,bu/day,illustrative,Phase 2 synthetic series,Harvest push intensifies.
+2024-09-23,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,78,minutes,illustrative,Phase 2 synthetic series,Queue conditions become highly visible.
+2024-09-23,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,70,percent,illustrative,Phase 2 synthetic series,Utilization approaches the watch threshold.
+2024-09-24,daily,grain_logistics,receipts_bu_day,Daily Receipts,13800,bu/day,illustrative,Phase 2 synthetic series,Peak receipts day for the first surge.
+2024-09-24,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,86,minutes,illustrative,Phase 2 synthetic series,Service degradation is now member-facing.
+2024-09-24,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,75,percent,illustrative,Phase 2 synthetic series,Approaches watch-period threshold.
+2024-09-25,daily,grain_logistics,receipts_bu_day,Daily Receipts,14200,bu/day,illustrative,Phase 2 synthetic series,Sustained high inbound flow.
+2024-09-25,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,92,minutes,illustrative,Phase 2 synthetic series,Turn time exceeds preferred operating window.
+2024-09-25,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,79,percent,illustrative,Phase 2 synthetic series,Near the first watch line.
+2024-09-26,daily,grain_logistics,receipts_bu_day,Daily Receipts,14600,bu/day,illustrative,Phase 2 synthetic series,Receipts remain elevated.
+2024-09-26,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,99,minutes,illustrative,Phase 2 synthetic series,Dispatch pressure is high.
+2024-09-26,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,83,percent,illustrative,Phase 2 synthetic series,Threshold pressure becomes operationally meaningful.
+2024-09-27,daily,grain_logistics,receipts_bu_day,Daily Receipts,15000,bu/day,illustrative,Phase 2 synthetic series,Receipts peak for the initial harvest run.
+2024-09-27,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,107,minutes,illustrative,Phase 2 synthetic series,Member waiting time enters a critical zone.
+2024-09-27,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,86,percent,illustrative,Phase 2 synthetic series,Crosses the 85 percent watch threshold.
+2024-09-28,daily,grain_logistics,receipts_bu_day,Daily Receipts,14800,bu/day,illustrative,Phase 2 synthetic series,Volume stays very high.
+2024-09-28,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,112,minutes,illustrative,Phase 2 synthetic series,Operational stress remains elevated.
+2024-09-28,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,88,percent,illustrative,Phase 2 synthetic series,High-risk operating window persists.
+2024-09-29,daily,grain_logistics,receipts_bu_day,Daily Receipts,14300,bu/day,illustrative,Phase 2 synthetic series,Receipts plateau before easing.
+2024-09-29,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,116,minutes,illustrative,Phase 2 synthetic series,Longest waits during the wet-pressure period.
+2024-09-29,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,90,percent,illustrative,Phase 2 synthetic series,Approaches hard-capacity conditions.
+2024-09-30,daily,grain_logistics,receipts_bu_day,Daily Receipts,13600,bu/day,illustrative,Phase 2 synthetic series,First peak begins to ease.
+2024-09-30,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,109,minutes,illustrative,Phase 2 synthetic series,Still above acceptable service target.
+2024-09-30,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,91,percent,illustrative,Phase 2 synthetic series,Capacity remains constrained.
+2024-10-01,daily,grain_logistics,receipts_bu_day,Daily Receipts,13200,bu/day,illustrative,Phase 2 synthetic series,Inbound flow remains high.
+2024-10-01,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,103,minutes,illustrative,Phase 2 synthetic series,Some pressure relief appears.
+2024-10-01,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,92,percent,illustrative,Phase 2 synthetic series,Storage stays near the hard threshold.
+2024-10-02,daily,grain_logistics,receipts_bu_day,Daily Receipts,12700,bu/day,illustrative,Phase 2 synthetic series,Receipts decline slowly.
+2024-10-02,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,97,minutes,illustrative,Phase 2 synthetic series,Turn time improves but remains high.
+2024-10-02,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,92,percent,illustrative,Phase 2 synthetic series,Outbound movement has not fully offset inbound flow.
+2024-10-03,daily,grain_logistics,receipts_bu_day,Daily Receipts,12100,bu/day,illustrative,Phase 2 synthetic series,Steady decline from peak volume.
+2024-10-03,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,92,minutes,illustrative,Phase 2 synthetic series,Wait times remain longer than target.
+2024-10-03,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,91,percent,illustrative,Phase 2 synthetic series,Capacity still constrained.
+2024-10-04,daily,grain_logistics,receipts_bu_day,Daily Receipts,11600,bu/day,illustrative,Phase 2 synthetic series,Volume starts to normalize.
+2024-10-04,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,86,minutes,illustrative,Phase 2 synthetic series,Service remains watch-worthy.
+2024-10-04,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,89,percent,illustrative,Phase 2 synthetic series,Capacity slowly recedes from the peak.
+2024-10-05,daily,grain_logistics,receipts_bu_day,Daily Receipts,11000,bu/day,illustrative,Phase 2 synthetic series,Harvest pressure eases.
+2024-10-05,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,81,minutes,illustrative,Phase 2 synthetic series,Improvement becomes visible to members.
+2024-10-05,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,87,percent,illustrative,Phase 2 synthetic series,Still above the watch threshold.
+2024-10-06,daily,grain_logistics,receipts_bu_day,Daily Receipts,10300,bu/day,illustrative,Phase 2 synthetic series,Receipts return toward sustainable levels.
+2024-10-06,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,75,minutes,illustrative,Phase 2 synthetic series,Queue pressure continues to improve.
+2024-10-06,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,85,percent,illustrative,Phase 2 synthetic series,Touches the watch threshold on the way down.
+2024-10-07,daily,grain_logistics,receipts_bu_day,Daily Receipts,9700,bu/day,illustrative,Phase 2 synthetic series,Post-peak operating cadence stabilizes.
+2024-10-07,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,68,minutes,illustrative,Phase 2 synthetic series,Service still slower than normal but improving.
+2024-10-07,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,83,percent,illustrative,Phase 2 synthetic series,Operational risk falls below the watch threshold.
+2024-10-08,daily,grain_logistics,receipts_bu_day,Daily Receipts,9200,bu/day,illustrative,Phase 2 synthetic series,Volume normalizes further.
+2024-10-08,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,62,minutes,illustrative,Phase 2 synthetic series,Service resumes a more acceptable pace.
+2024-10-08,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,81,percent,illustrative,Phase 2 synthetic series,Capacity pressure retreats.
+2024-10-09,daily,grain_logistics,receipts_bu_day,Daily Receipts,8900,bu/day,illustrative,Phase 2 synthetic series,Harvest remains active but manageable.
+2024-10-09,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,57,minutes,illustrative,Phase 2 synthetic series,Near the upper bound of normal.
+2024-10-09,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,79,percent,illustrative,Phase 2 synthetic series,Storage pressure eases.
+2024-10-10,daily,grain_logistics,receipts_bu_day,Daily Receipts,8500,bu/day,illustrative,Phase 2 synthetic series,Operating load settles.
+2024-10-10,daily,grain_logistics,truck_turn_time_minutes,Truck Turn Time,52,minutes,illustrative,Phase 2 synthetic series,Service returns close to normal.
+2024-10-10,daily,grain_logistics,bin_capacity_utilization_pct,Bin Capacity Utilization,77,percent,illustrative,Phase 2 synthetic series,End of the primary watch period.

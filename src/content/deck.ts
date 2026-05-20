@@ -22,6 +22,7 @@ export type SlideTone = 'hero' | 'light' | 'dark' | 'accent' | 'warning';
 export type SlideLayout =
   | 'hero'
   | 'agenda'
+  | 'analytics'
   | 'signal-grid'
   | 'trend-cards'
   | 'operating-model'
@@ -32,6 +33,8 @@ export type SlideLayout =
   | 'timeline'
   | 'next-steps'
   | 'closing';
+
+export type StoryId = 'margin_pressure' | 'precision_agronomy' | 'grain_logistics';
 
 export interface Stat {
   label: string;
@@ -68,6 +71,7 @@ export interface SlideDefinition {
   subtitle?: string;
   layout: SlideLayout;
   tone: SlideTone;
+  chartStoryId?: StoryId;
   stats?: Stat[];
   bullets?: string[];
   leftTitle?: string;
@@ -179,31 +183,16 @@ export const slides: SlideDefinition[] = [
   {
     id: 'margin-story',
     eyebrow: 'Data Story 1',
-    title: 'Margin pressure becomes clearer when signals are read together',
-    subtitle: 'A single fertilizer chart is not the story. The stronger story combines input cost, crop price, credit cost, and booking behavior.',
-    layout: 'signal-grid',
-    tone: 'light',
-    signals: [
-      {
-        title: 'Fertilizer price trend',
-        detail: 'Input cost volatility changes the economics of the recommendation before the member ever asks about timing.',
-        icon: HandCoins,
-      },
-      {
-        title: 'Corn price trend',
-        detail: 'Revenue expectations shape how much pricing pressure the operation can absorb.',
-        icon: TrendingUp,
-      },
-      {
-        title: 'Operating loan rate',
-        detail: 'The cost of working capital changes the margin story even when the crop outlook looks steady.',
-        icon: BriefcaseBusiness,
-      },
-      {
-        title: 'Booking behavior',
-        detail: 'Early or delayed commitments reveal how members are reacting before a sales report fully explains it.',
-        icon: Users,
-      },
+    title: 'Corn proxy fell 15% while fertilizer proxy rose to 114',
+    subtitle:
+      'Start with the real proxy signals, then use synthetic margin-pressure and booking examples to show how a co-op might translate that setup into action.',
+    layout: 'analytics',
+    tone: 'dark',
+    chartStoryId: 'margin_pressure',
+    bullets: [
+      'Real proxy data leads the story: corn weakens from January to August while fertilizer pressure builds into June and financing stays above 5% through September.',
+      'The synthetic margin-pressure example crosses the watch threshold in April and peaks in June, showing how those real inputs could be operationalized.',
+      'The synthetic booking example softens after the pressure example moves above the watch line, which turns the slide into an outreach-timing story.',
     ],
   },
   {
@@ -235,31 +224,16 @@ export const slides: SlideDefinition[] = [
   {
     id: 'agronomy-story',
     eyebrow: 'Data Story 2',
-    title: 'Precision agronomy is a data interpretation problem before it is an AI problem',
-    subtitle: 'The value appears when imagery, tests, weather, and as-applied history become one coherent field story.',
-    layout: 'signal-grid',
-    tone: 'light',
-    signals: [
-      {
-        title: 'Imagery variation',
-        detail: 'Remote sensing shows where the field is diverging, but it does not explain why on its own.',
-        icon: Satellite,
-      },
-      {
-        title: 'Tissue test results',
-        detail: 'Lab evidence turns a visible anomaly into a more defensible agronomic hypothesis.',
-        icon: Sprout,
-      },
-      {
-        title: 'Weather deviation',
-        detail: 'Rainfall and temperature context help separate a temporary stress response from something more structural.',
-        icon: MapPinned,
-      },
-      {
-        title: 'As-applied history',
-        detail: 'What was actually done in the field is often the missing context that changes the recommendation.',
-        icon: Combine,
-      },
+    title: 'NDVI fell to -0.07 before a rain-assisted early-July recovery',
+    subtitle:
+      'The chart now emphasizes the weather-to-canopy narrative: hot weeks and dry intervals precede the first NDVI decline, early-July rainfall supports recovery, and a second July window likely aligns with pollination and early grain fill.',
+    layout: 'analytics',
+    tone: 'dark',
+    chartStoryId: 'precision_agronomy',
+    bullets: [
+      'The late-June window plausibly aligns with late vegetative canopy growth, when hot and dry conditions can start to show up as canopy stress.',
+      'The first NDVI drop is followed by a July 1 week with +2.32 inches of precipitation and a partial canopy recovery, so the heat-and-recovery narrative is supportable for the first stress cycle.',
+      'The stronger July 15 to July 29 window is more plausibly a pollination to early grain-fill problem, which makes scout triage more important than a generic anomaly alert.',
     ],
   },
   {
@@ -291,31 +265,16 @@ export const slides: SlideDefinition[] = [
   {
     id: 'logistics-story',
     eyebrow: 'Data Story 3',
-    title: 'Logistics becomes a service issue when the signal mix changes fast',
-    subtitle: 'Receipts alone are not enough. The stronger operational story includes moisture, truck turns, and available capacity.',
-    layout: 'signal-grid',
+    title: 'Corn harvest rose from 11% to 97% statewide',
+    subtitle:
+      'Lead with the real USDA crop-progress curve, then use synthetic receipts, turn-time, and capacity examples as location-level inferences from that harvest ramp.',
+    layout: 'analytics',
     tone: 'dark',
-    signals: [
-      {
-        title: 'Daily receipts',
-        detail: 'Volume is the obvious signal, but it rarely explains the whole service picture by itself.',
-        icon: Warehouse,
-      },
-      {
-        title: 'Average moisture',
-        detail: 'Drying demand changes the pace at which volume can actually move through the system.',
-        icon: Fuel,
-      },
-      {
-        title: 'Truck cycle time',
-        detail: 'Turn-time deterioration is often the earliest sign that the member experience is about to worsen.',
-        icon: Route,
-      },
-      {
-        title: 'Available bin capacity',
-        detail: 'Capacity context distinguishes a busy day from a watch period that needs intervention.',
-        icon: BarChart3,
-      },
+    chartStoryId: 'grain_logistics',
+    bullets: [
+      'The real USDA series leads the slide: statewide corn harvest moves from 11% on September 30 to 97% by November 18.',
+      'The receipts, turn-time, and capacity panels are synthetic inferences, included to show how a local facility could experience that statewide harvest ramp.',
+      'The synthetic service signal crosses its watch line before the synthetic capacity line reaches hard-pressure territory, which is why operations should watch member delay first.',
     ],
   },
   {

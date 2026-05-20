@@ -1,0 +1,61 @@
+date,timeGrain,storyId,entityId,metricKey,metricLabel,value,unit,sourceType,sourceName,notes
+2024-01-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,198.76,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-01-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,5.33,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-01-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,99,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-01-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,92,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-01-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,108,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-02-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,188.95,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-02-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,5.33,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-02-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,100,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-02-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,95,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-02-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,106,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-03-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,190.23,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-03-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,5.33,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-03-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,103,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-03-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,101,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-03-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,102,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-04-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,190.90,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-04-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,5.33,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-04-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,107,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-04-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,107,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-04-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,98,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-05-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,201.02,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-05-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,5.33,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-05-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,111,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-05-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,111,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-05-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,94,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-06-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,191.24,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-06-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,5.33,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-06-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,114,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-06-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,114,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-06-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,90,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-07-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,177.77,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-07-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,5.33,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-07-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,112,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-07-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,112,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-07-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,89,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-08-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,169.30,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-08-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,5.33,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-08-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,109,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-08-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,109,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-08-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,91,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-09-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,183.66,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-09-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,5.13,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-09-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,105,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-09-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,105,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-09-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,95,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-10-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,189.59,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-10-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,4.83,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-10-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,102,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-10-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,99,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-10-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,99,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-11-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,201.31,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-11-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,4.64,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-11-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,100,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-11-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,97,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-11-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,101,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.
+2024-12-01,monthly,margin_pressure,,corn_price_proxy_usd_mt,Corn Price Proxy,202.83,usd/mt,proxy,FRED PMAIZMTUSDM,Public maize price proxy used until an Iowa-specific NASS extract is normalized.
+2024-12-01,monthly,margin_pressure,,financing_proxy_pct,Financing Proxy,4.48,percent,proxy,FRED DFF,Daily federal funds rate aggregated to monthly average as financing-environment proxy.
+2024-12-01,monthly,margin_pressure,,fertilizer_cost_proxy_index,Fertilizer Cost Proxy,99,index,proxy,ERS fertilizer workbook + narrative proxy,Proxy index anchored to ERS fertilizer price history and normalized for 2024 storytelling.
+2024-12-01,monthly,margin_pressure,,margin_pressure_index,Margin Pressure Index,94,index,illustrative,Phase 2 synthetic series,Derived operating-pressure series for chart interpretation.
+2024-12-01,monthly,margin_pressure,,booking_behavior_index,Booking Behavior Index,104,index,illustrative,Phase 2 synthetic series,Illustrative lagged member-booking response.

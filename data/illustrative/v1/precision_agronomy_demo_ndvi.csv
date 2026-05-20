@@ -1,0 +1,21 @@
+date,timeGrain,storyId,entityId,metricKey,metricLabel,value,unit,sourceType,sourceName,notes
+2024-05-06,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.02,index,illustrative,Phase 2 synthetic series,Emergence period stays close to baseline.
+2024-05-13,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,0.01,index,illustrative,Phase 2 synthetic series,Early vigor improves with warm conditions.
+2024-05-20,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,0.03,index,illustrative,Phase 2 synthetic series,Positive anomaly during rapid vegetative growth.
+2024-05-27,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,0.04,index,illustrative,Phase 2 synthetic series,Strong early canopy development.
+2024-06-03,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,0.02,index,illustrative,Phase 2 synthetic series,Storm variability introduces modest field divergence.
+2024-06-10,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,0.01,index,illustrative,Phase 2 synthetic series,Signal moderates before stress window.
+2024-06-17,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.03,index,illustrative,Phase 2 synthetic series,Field stress begins to emerge.
+2024-06-24,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.06,index,illustrative,Phase 2 synthetic series,Visible divergence grows during heat and moisture pressure.
+2024-07-01,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.04,index,illustrative,Phase 2 synthetic series,Recovery starts after rainfall.
+2024-07-08,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.01,index,illustrative,Phase 2 synthetic series,Some management zones recover faster than others.
+2024-07-15,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.05,index,illustrative,Phase 2 synthetic series,Second stress wave supports triage story.
+2024-07-22,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.07,index,illustrative,Phase 2 synthetic series,Peak anomaly supports agronomist review trigger.
+2024-07-29,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.04,index,illustrative,Phase 2 synthetic series,Later-season conditions improve but do not fully normalize.
+2024-08-05,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.02,index,illustrative,Phase 2 synthetic series,Stress remains visible in weaker zones only.
+2024-08-12,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.01,index,illustrative,Phase 2 synthetic series,Recovery continues.
+2024-08-19,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,0.00,index,illustrative,Phase 2 synthetic series,Field signal returns near baseline.
+2024-08-26,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,0.01,index,illustrative,Phase 2 synthetic series,Late-season canopy remains serviceable.
+2024-09-02,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.01,index,illustrative,Phase 2 synthetic series,Pre-harvest decline begins.
+2024-09-09,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.03,index,illustrative,Phase 2 synthetic series,Senescence phase begins.
+2024-09-16,weekly,precision_agronomy,demo_field_01,ndvi_anomaly_index,NDVI Anomaly Index,-0.05,index,illustrative,Phase 2 synthetic series,Season-end decline closes the signal.

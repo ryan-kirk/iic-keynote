@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { deckSignals, type SlideDefinition } from '../content/deck';
+import { AnalyticsSlide } from './AnalyticsSlide';
 import { SlideFrame } from './SlideFrame';
 
 interface SlideRendererProps {
@@ -49,6 +50,8 @@ function renderSlide(slide: SlideDefinition) {
           </div>
         </div>
       );
+    case 'analytics':
+      return <AnalyticsSlide slide={slide} />;
     case 'signal-grid':
     case 'service-stack':
       return (

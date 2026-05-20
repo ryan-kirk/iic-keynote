@@ -1,0 +1,7 @@
+date,timeGrain,storyId,entityId,metricKey,metricLabel,value,unit,sourceType,sourceName,notes
+2024-05-04,event,precision_agronomy,demo_field_01_zone_a,n_applied_lb_ac,N Applied,168,lb/ac,illustrative,Phase 2 synthetic series,High-productivity zone receives the top rate.
+2024-05-04,event,precision_agronomy,demo_field_01_zone_b,n_applied_lb_ac,N Applied,154,lb/ac,illustrative,Phase 2 synthetic series,Core management zone rate.
+2024-05-04,event,precision_agronomy,demo_field_01_zone_c,n_applied_lb_ac,N Applied,142,lb/ac,illustrative,Phase 2 synthetic series,Moderate-rate zone for variable-rate demo field.
+2024-05-04,event,precision_agronomy,demo_field_01_zone_d,n_applied_lb_ac,N Applied,128,lb/ac,illustrative,Phase 2 synthetic series,Lower-productivity zone rate.
+2024-06-21,event,precision_agronomy,demo_field_01_zone_b,scout_attention_score,Scout Attention Score,72,index,illustrative,Phase 2 synthetic series,Zone flagged for manual review during the first anomaly window.
+2024-07-18,event,precision_agronomy,demo_field_01_zone_c,scout_attention_score,Scout Attention Score,88,index,illustrative,Phase 2 synthetic series,Zone receives highest review priority during second stress window.

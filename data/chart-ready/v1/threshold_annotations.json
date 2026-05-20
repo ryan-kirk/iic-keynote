@@ -1,0 +1,249 @@
+{
+  "schemaVersion": "v1",
+  "stories": {
+    "margin_pressure": {
+      "thresholds": [
+        {
+          "id": "margin-watch-threshold",
+          "metricKey": "margin_pressure_index",
+          "operator": ">=",
+          "value": 105,
+          "unit": "index",
+          "severity": "watch",
+          "meaning": "Combined input, crop price, and financing pressure has moved outside a neutral operating range."
+        },
+        {
+          "id": "margin-escalation-threshold",
+          "metricKey": "margin_pressure_index",
+          "operator": ">=",
+          "value": 110,
+          "unit": "index",
+          "severity": "escalate",
+          "meaning": "Margin conditions are tight enough to justify earlier member outreach and recommendation review."
+        },
+        {
+          "id": "booking-softness-threshold",
+          "metricKey": "booking_behavior_index",
+          "operator": "<=",
+          "value": 96,
+          "unit": "index",
+          "severity": "watch",
+          "meaning": "Member booking behavior has weakened enough to justify segment-level outreach triage."
+        }
+      ],
+      "comparisonWindows": [
+        {
+          "id": "margin-tight-window",
+          "label": "Tight margin watch window",
+          "startDate": "2024-04-01",
+          "endDate": "2024-09-01",
+          "meaning": "Pressure and lagged booking softness are both visible through the main spring and summer window."
+        }
+      ],
+      "annotations": [
+        {
+          "date": "2024-04-01",
+          "type": "window-start",
+          "label": "Pressure moves into watch range",
+          "description": "Margin pressure reaches the first watch threshold as spring input timing intensifies."
+        },
+        {
+          "date": "2024-06-01",
+          "type": "peak",
+          "label": "Peak pressure month",
+          "description": "This is the illustrative high-water mark for the combined pressure story."
+        },
+        {
+          "date": "2024-09-01",
+          "type": "recovery",
+          "label": "Harvest recovery begins",
+          "description": "Conditions improve modestly as harvest approaches and member visibility increases."
+        }
+      ]
+    },
+    "precision_agronomy": {
+      "thresholds": [
+        {
+          "id": "ndvi-review-threshold",
+          "metricKey": "ndvi_anomaly_index",
+          "operator": "<=",
+          "value": -0.04,
+          "unit": "index",
+          "severity": "watch",
+          "meaning": "Field variation is large enough to justify agronomist review."
+        },
+        {
+          "id": "ndvi-escalation-threshold",
+          "metricKey": "ndvi_anomaly_index",
+          "operator": "<=",
+          "value": -0.06,
+          "unit": "index",
+          "severity": "escalate",
+          "meaning": "Field variation is severe enough that the field should move to the top of the review queue."
+        },
+        {
+          "id": "heat-stress-threshold",
+          "metricKey": "temp_deviation_f",
+          "operator": ">=",
+          "value": 5,
+          "unit": "degF",
+          "severity": "context",
+          "meaning": "Temperatures are materially above climatology and may explain vegetative stress."
+        },
+        {
+          "id": "dryness-threshold",
+          "metricKey": "precip_deviation_in",
+          "operator": "<=",
+          "value": -0.6,
+          "unit": "inches",
+          "severity": "context",
+          "meaning": "Weekly precipitation has fallen meaningfully below climatology."
+        },
+        {
+          "id": "tissue-n-target",
+          "metricKey": "tissue_n_target_ppm",
+          "operator": ">=",
+          "value": 2500,
+          "unit": "ppm",
+          "severity": "benchmark",
+          "meaning": "Illustrative sufficiency benchmark for corn tissue nitrogen context."
+        }
+      ],
+      "comparisonWindows": [
+        {
+          "id": "agronomy-stress-window-1",
+          "label": "Early stress window",
+          "startDate": "2024-06-17",
+          "endDate": "2024-06-24",
+          "meaning": "First period where NDVI anomaly and above-normal temperatures justify field review."
+        },
+        {
+          "id": "agronomy-stress-window-2",
+          "label": "Late July stress window",
+          "startDate": "2024-07-15",
+          "endDate": "2024-07-29",
+          "meaning": "Second and stronger window used to support triage and AI prioritization."
+        }
+      ],
+      "annotations": [
+        {
+          "date": "2024-05-04",
+          "type": "management-event",
+          "label": "Variable-rate application pass",
+          "description": "Illustrative as-applied context is introduced before the field-stress windows emerge."
+        },
+        {
+          "date": "2024-06-21",
+          "type": "scout-event",
+          "label": "Zone B flagged",
+          "description": "First scout-attention event aligned to the early stress window."
+        },
+        {
+          "date": "2024-07-18",
+          "type": "scout-event",
+          "label": "Zone C flagged highest",
+          "description": "Second scout-attention event aligned to the stronger late-July stress window."
+        }
+      ]
+    },
+    "grain_logistics": {
+      "thresholds": [
+        {
+          "id": "capacity-watch-threshold",
+          "metricKey": "bin_capacity_utilization_pct",
+          "operator": ">=",
+          "value": 82,
+          "unit": "percent",
+          "severity": "watch",
+          "meaning": "Capacity is tight enough that logistics becomes a visible member-service risk."
+        },
+        {
+          "id": "capacity-hard-threshold",
+          "metricKey": "bin_capacity_utilization_pct",
+          "operator": ">=",
+          "value": 90,
+          "unit": "percent",
+          "severity": "escalate",
+          "meaning": "Capacity is approaching a hard operational constraint."
+        },
+        {
+          "id": "turn-time-watch-threshold",
+          "metricKey": "truck_turn_time_minutes",
+          "operator": ">=",
+          "value": 75,
+          "unit": "minutes",
+          "severity": "watch",
+          "meaning": "Truck wait time is long enough to change member experience materially."
+        },
+        {
+          "id": "turn-time-escalation-threshold",
+          "metricKey": "truck_turn_time_minutes",
+          "operator": ">=",
+          "value": 100,
+          "unit": "minutes",
+          "severity": "escalate",
+          "meaning": "Truck wait time has moved into a service-recovery range that deserves active intervention."
+        }
+      ],
+      "comparisonWindows": [
+        {
+          "id": "grain-watch-window",
+          "label": "Primary harvest watch window",
+          "startDate": "2024-09-25",
+          "endDate": "2024-10-06",
+          "meaning": "Period where utilization and wait time both indicate meaningful operational pressure."
+        }
+      ],
+      "annotations": [
+        {
+          "date": "2024-09-03",
+          "type": "report-progress",
+          "label": "Corn mature reaches 10%",
+          "description": "The public harvest anchor now starts with an extracted statewide progress percentage rather than just a report date."
+        },
+        {
+          "date": "2024-09-16",
+          "type": "report-progress",
+          "label": "Corn mature reaches 41%",
+          "description": "Maturity accelerates before the operating watch window peaks."
+        },
+        {
+          "date": "2024-09-30",
+          "type": "report-progress",
+          "label": "Corn harvested reaches 11%",
+          "description": "The first extracted harvest percentage lines up with the rising queue and capacity pressure period."
+        },
+        {
+          "date": "2024-10-15",
+          "type": "report-progress",
+          "label": "Corn harvested reaches 45%",
+          "description": "Harvest scale stays visible even as the first operating spike begins to ease."
+        },
+        {
+          "date": "2024-10-28",
+          "type": "report-progress",
+          "label": "Corn harvested reaches 84%",
+          "description": "Public crop progress confirms the broader statewide ramp through late October."
+        },
+        {
+          "date": "2024-11-18",
+          "type": "report-progress",
+          "label": "Corn harvested reaches 97%",
+          "description": "The public harvest curve closes near completion by mid-November."
+        },
+        {
+          "date": "2024-09-25",
+          "type": "threshold-crossing",
+          "label": "Service watch threshold crossed",
+          "description": "Turn time moves above the 75-minute watch line before storage reaches the hard constraint."
+        },
+        {
+          "date": "2024-09-29",
+          "type": "threshold-crossing",
+          "label": "Hard-pressure window emerges",
+          "description": "Illustrative utilization approaches 90 percent and queue time peaks above the escalation line."
+        }
+      ]
+    }
+  }
+}
