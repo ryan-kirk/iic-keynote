@@ -422,7 +422,7 @@ blockquote {
 
 .analytics-sidebar-story {
   grid-area: story;
-  align-self: end;
+  align-self: start;
   justify-self: end;
   margin-top: 0;
 }
