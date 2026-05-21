@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import PptxGenJS from 'pptxgenjs';
+import { getSlideWhatMattersBullets } from '../src/content/deck.ts';
 import { formatMetricValue } from '../src/data/storyChartShared.ts';
 import {
   CHART_OUTPUT_DIR,
@@ -530,15 +531,23 @@ function renderAnalyticsSlide(pptx, slide, definition, manifest) {
   const panels = getVisiblePanelsForSlide(definition);
   const chartPaths = panels.map((panel) => manifest[storyId][panel.id]);
   const compactMode = definition.analyticsMode === 'compact';
+  const storyBullets = getSlideWhatMattersBullets(definition);
 
-  addTitleBlock(slide, definition, { titleY: 0.72, titleW: 8.2, subtitleY: 1.45, subtitleW: 8.1 });
+  addTitleBlock(slide, definition, {
+    titleY: compactMode ? 0.68 : 0.72,
+    titleW: compactMode ? 8.4 : 8.2,
+    subtitleY: compactMode ? 1.36 : 1.45,
+    subtitleW: compactMode ? 8.3 : 8.1,
+    titleFontSize: compactMode ? 25 : 24,
+    subtitleFontSize: compactMode ? 14.6 : 14,
+  });
 
-  const chartWidth = compactMode ? 4.18 : 3.95;
-  const chartHeight = compactMode ? 2.02 : panels.length > 2 ? 1.65 : 1.84;
-  const leftX = compactMode ? 0.38 : 0.6;
-  const secondColumnX = compactMode ? 4.7 : 4.8;
-  const topY = compactMode ? 2.08 : 2.2;
-  const rowGap = 0.18;
+  const chartWidth = compactMode ? 4.28 : 3.95;
+  const chartHeight = compactMode ? 2.16 : panels.length > 2 ? 1.65 : 1.84;
+  const leftX = compactMode ? 0.32 : 0.6;
+  const secondColumnX = compactMode ? 4.68 : 4.8;
+  const topY = compactMode ? 1.94 : 2.2;
+  const rowGap = compactMode ? 0.14 : 0.18;
 
   chartPaths.forEach((chartPath, chartIndex) => {
     const column = chartIndex % 2;
@@ -556,11 +565,11 @@ function renderAnalyticsSlide(pptx, slide, definition, manifest) {
   });
 
   if (compactMode) {
-    addPanel(slide, { x: 9.05, y: 1.82, w: 3.25, h: 3.38, tone: definition.tone });
+    addPanel(slide, { x: 9.08, y: 1.76, w: 3.06, h: 3.88, tone: definition.tone });
     slide.addText('What matters', {
-      x: 9.28,
-      y: 2.05,
-      w: 2.55,
+      x: 9.31,
+      y: 1.99,
+      w: 2.52,
       h: 0.22,
       fontFace: FONT.body,
       fontSize: 10,
@@ -570,28 +579,28 @@ function renderAnalyticsSlide(pptx, slide, definition, manifest) {
       margin: 0,
     });
     slide.addText('Story readout', {
-      x: 9.28,
-      y: 2.31,
-      w: 2.55,
+      x: 9.31,
+      y: 2.25,
+      w: 2.52,
       h: 0.26,
       fontFace: FONT.body,
-      fontSize: 15,
+      fontSize: 15.5,
       bold: true,
       color: COLORS[definition.tone].text,
       margin: 0,
     });
-    addBulletList(slide, definition.bullets ?? [], {
-      x: 9.28,
-      y: 2.69,
-      w: 2.58,
-      lineH: 0.55,
+    addBulletList(slide, storyBullets, {
+      x: 9.31,
+      y: 2.67,
+      w: 2.55,
+      lineH: 0.59,
       tone: definition.tone,
-      fontSize: 10.8,
+      fontSize: 11.2,
     });
     slide.addText(config.sourceLabel, {
-      x: 9.28,
-      y: 4.62,
-      w: 2.6,
+      x: 9.31,
+      y: 5.02,
+      w: 2.58,
       h: 0.42,
       fontFace: FONT.body,
       fontSize: 10.2,
@@ -626,7 +635,7 @@ function renderAnalyticsSlide(pptx, slide, definition, manifest) {
     color: COLORS[definition.tone].text,
     margin: 0,
   });
-  addBulletList(slide, definition.bullets ?? [], {
+  addBulletList(slide, storyBullets, {
     x: 9.35,
     y: 2.72,
     w: 2.95,
@@ -687,7 +696,7 @@ function addTitleBlock(slide, definition, options) {
     w: options.titleW,
     h: 0.62,
     fontFace: FONT.heading,
-    fontSize: 24,
+    fontSize: options.titleFontSize ?? 24,
     bold: true,
     color: tone.text,
     margin: 0,
@@ -701,7 +710,7 @@ function addTitleBlock(slide, definition, options) {
       w: options.subtitleW,
       h: 0.58,
       fontFace: FONT.body,
-      fontSize: 14,
+      fontSize: options.subtitleFontSize ?? 14,
       color: tone.muted,
       margin: 0,
       fit: 'shrink',

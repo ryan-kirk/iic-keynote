@@ -322,8 +322,8 @@ blockquote {
 }
 
 .analytics-layout-compact {
-  grid-template-columns: minmax(0, 1.9fr) 300px;
-  gap: 16px;
+  grid-template-columns: minmax(0, 2.05fr) 290px;
+  gap: 18px;
 }
 
 .analytics-main {
@@ -335,7 +335,7 @@ blockquote {
 }
 
 .analytics-layout-compact .analytics-grid {
-  gap: 14px;
+  gap: 16px;
 }
 
 .analytics-sidebar {
@@ -345,6 +345,14 @@ blockquote {
 
 .analytics-sidebar-compact {
   align-content: start;
+}
+
+.analytics-layout-compact h1 {
+  font-size: clamp(3rem, 4.8vw, 4.9rem);
+}
+
+.analytics-layout-compact .lede.narrow {
+  max-width: 760px;
 }
 
 .analytics-card h2,
@@ -430,7 +438,7 @@ blockquote {
 }
 
 .analytics-layout-compact .metric-chart {
-  height: 208px;
+  height: 224px;
 }
 
 .chart-shell {

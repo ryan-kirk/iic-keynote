@@ -89,6 +89,8 @@ export interface SlideDefinition {
   quoteAttribution?: string;
 }
 
+const ORIGINAL_COMBINED_TITLE_PREFIX = 'Original combined-slide title:';
+
 export const presentationMeta = {
   title: 'Iowa Agricultural Co-ops',
   subtitle: 'A data-and-AI narrative built around signals, thresholds, and co-op operating examples',
@@ -97,6 +99,20 @@ export const presentationMeta = {
   exportNote:
     'Slides are defined as structured content objects so the same source can later map into PowerPoint or PDF export workflows.',
 };
+
+export function getSlideWhatMattersBullets(slide: SlideDefinition): string[] {
+  const bullets = slide.bullets ? [...slide.bullets] : [];
+  const originalCombinedTitle = slide.speakerNotes
+    ?.find((note) => note.startsWith(ORIGINAL_COMBINED_TITLE_PREFIX))
+    ?.slice(ORIGINAL_COMBINED_TITLE_PREFIX.length)
+    .trim();
+
+  if (originalCombinedTitle && !bullets.includes(originalCombinedTitle)) {
+    bullets.unshift(originalCombinedTitle);
+  }
+
+  return bullets;
+}
 
 export const slides: SlideDefinition[] = [
   {

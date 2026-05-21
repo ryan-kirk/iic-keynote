@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { slides, presentationMeta } from '../src/content/deck.ts';
+import { getSlideWhatMattersBullets, slides, presentationMeta } from '../src/content/deck.ts';
 import {
   buildStoryDatasets,
   formatMetricValue,
@@ -11,8 +11,6 @@ import {
   buildPanelSeries,
   buildPath,
   formatAxisDate,
-  formatPanelValue,
-  formatSourceTypeLabel,
   formatThreshold,
   getPanelThresholds,
   resolveDomain,
@@ -105,6 +103,7 @@ export async function generateChartAssets(outputDir = CHART_OUTPUT_DIR) {
 }
 
 export function buildSpeakerNotes(slide, index, total, datasets) {
+  const talkingPoints = getSlideWhatMattersBullets(slide);
   const lines = [
     `${presentationMeta.title}`,
     `Slide ${String(index + 1).padStart(2, '0')} of ${String(total).padStart(2, '0')}: ${slide.title}`,
@@ -119,9 +118,9 @@ export function buildSpeakerNotes(slide, index, total, datasets) {
     slide.stats.forEach((stat) => lines.push(`- ${stat.label}: ${stat.value}`));
   }
 
-  if (slide.bullets?.length) {
+  if (talkingPoints.length) {
     lines.push('', 'Talking points:');
-    slide.bullets.forEach((bullet) => lines.push(`- ${bullet}`));
+    talkingPoints.forEach((bullet) => lines.push(`- ${bullet}`));
   }
 
   if (slide.signals?.length) {
@@ -198,18 +197,24 @@ export function buildSpeakerNotes(slide, index, total, datasets) {
 function renderChartCardSvg({ dataset, panel }) {
   const width = 920;
   const height = 420;
-  const padding = { top: 20, right: 18, bottom: 20, left: 18 };
-  const chartBounds = { x: 24, y: 122, w: 872, h: 240 };
-  const plotPadding = { top: 18, right: 12, bottom: 20, left: 12 };
+  const padding = { left: 28, right: 28 };
+  const plotPadding = { top: 16, right: 14, bottom: 22, left: 14 };
   const panelSeries = buildPanelSeries(panel, dataset.records);
   const points = panelSeries.flatMap((series) => series.points);
   const thresholds = getPanelThresholds(panel, dataset.thresholds);
-  const sourceTypes = getPanelSourceTypes(dataset.records, panel.series.map((series) => series.metricKey));
   const uniqueDates = [...new Set(points.map((point) => point.date))].sort();
   const minDate = uniqueDates[0];
   const maxDate = uniqueDates[uniqueDates.length - 1];
   const domain = resolveDomain(points, thresholds, panel.minValue, panel.maxValue);
   const showZeroAxis = domain.min <= 0 && domain.max >= 0;
+  const titleFontSize = resolveChartTitleFontSize(panel.title);
+  const legendLayout = buildLegendLayout(panelSeries, width, padding.left, padding.right);
+  const chartBounds = {
+    x: 24,
+    y: legendLayout.bottomY + 18,
+    w: 872,
+    h: Math.max(248, height - (legendLayout.bottomY + 18) - 34),
+  };
 
   const comparisonWindowsMarkup = dataset.comparisonWindows
     .map((window) => {
@@ -287,34 +292,26 @@ function renderChartCardSvg({ dataset, panel }) {
     })
     .join('');
 
-  const legendMarkup = panelSeries
-    .map((series, index) => {
-      const latestPoint = series.points[series.points.length - 1];
-      const baseY = 44 + index * 46;
-      return `
-        <rect x="664" y="${baseY}" width="14" height="14" rx="7" fill="${series.color}" />
-        <text x="686" y="${baseY + 12}" fill="${SVG_COLORS.white}" font-family="Arial, sans-serif" font-size="14" font-weight="700">${escapeXml(
-          series.label,
+  const legendMarkup = legendLayout.items
+    .map(
+      (item) => `
+        <circle cx="${round(item.x + 7)}" cy="${round(item.y + 7)}" r="6" fill="${item.color}" />
+        <text x="${round(item.x + 22)}" y="${round(item.y + 11)}" fill="${SVG_COLORS.white}" font-family="Arial, sans-serif" font-size="13" font-weight="700">${escapeXml(
+          item.label,
         )}</text>
-        <text x="686" y="${baseY + 30}" fill="${SVG_COLORS.muted}" font-family="Arial, sans-serif" font-size="12">${escapeXml(
-          formatPanelValue(series.metricKey, latestPoint.value, panel.displayMode),
-        )}</text>
-      `;
-    })
+      `,
+    )
     .join('');
-
-  const sourcePillsMarkup = renderPills(sourceTypes, 28, 82);
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect x="1" y="1" width="${width - 2}" height="${height - 2}" rx="28" fill="#ffffff" fill-opacity="0.08" stroke="${SVG_COLORS.stroke}" />
-  <text x="${padding.left + 10}" y="36" fill="${SVG_COLORS.watch}" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.8">${escapeXml(
+  <text x="${padding.left}" y="28" fill="${SVG_COLORS.watch}" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1.8">${escapeXml(
     panel.eyebrow.toUpperCase(),
   )}</text>
-  <text x="28" y="64" fill="${SVG_COLORS.white}" font-family="Georgia, serif" font-size="26" font-weight="700">${escapeXml(
+  <text x="${padding.left}" y="58" fill="${SVG_COLORS.white}" font-family="Georgia, serif" font-size="${titleFontSize}" font-weight="700">${escapeXml(
     panel.title,
   )}</text>
-  ${sourcePillsMarkup}
   ${legendMarkup}
   <rect x="${chartBounds.x}" y="${chartBounds.y}" width="${chartBounds.w}" height="${chartBounds.h}" rx="20" fill="${SVG_COLORS.shell}" stroke="${SVG_COLORS.stroke}" />
   ${comparisonWindowsMarkup}
@@ -331,31 +328,47 @@ function renderChartCardSvg({ dataset, panel }) {
 </svg>`;
 }
 
-function renderPills(sourceTypes, startX, y) {
+function buildLegendLayout(panelSeries, width, startX, rightPadding) {
+  const items = [];
+  const rowHeight = 22;
   let cursorX = startX;
+  let cursorY = 74;
+  const maxX = width - rightPadding;
 
-  return sourceTypes
-    .map((sourceType) => {
-      const label = formatSourceTypeLabel(sourceType);
-      const width = 18 + label.length * 7.2;
-      const markup = `
-        <rect x="${round(cursorX)}" y="${y}" width="${round(width)}" height="22" rx="11" fill="${severityColor(
-        sourceType,
-      )}" fill-opacity="0.18" stroke="${severityColor(sourceType)}" stroke-opacity="0.35" />
-        <text x="${round(cursorX + width / 2)}" y="${y + 15}" fill="${severityColor(
-          sourceType,
-        )}" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700">${escapeXml(
-        label,
-      )}</text>
-      `;
-      cursorX += width + 8;
-      return markup;
-    })
-    .join('');
+  panelSeries.forEach((series) => {
+    const labelWidth = 24 + series.label.length * 7.1;
+
+    if (cursorX + labelWidth > maxX) {
+      cursorX = startX;
+      cursorY += rowHeight;
+    }
+
+    items.push({
+      x: cursorX,
+      y: cursorY,
+      label: series.label,
+      color: series.color,
+    });
+
+    cursorX += labelWidth + 18;
+  });
+
+  return {
+    items,
+    bottomY: cursorY + 14,
+  };
 }
 
-function getPanelSourceTypes(records, metricKeys) {
-  return [...new Set(records.filter((record) => metricKeys.includes(record.metricKey)).map((record) => record.sourceType))];
+function resolveChartTitleFontSize(title) {
+  if (title.length > 34) {
+    return 22;
+  }
+
+  if (title.length > 28) {
+    return 24;
+  }
+
+  return 26;
 }
 
 function severityColor(severity) {

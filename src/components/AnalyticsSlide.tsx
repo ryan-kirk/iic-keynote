@@ -1,4 +1,4 @@
-import type { SlideDefinition } from '../content/deck';
+import { getSlideWhatMattersBullets, type SlideDefinition } from '../content/deck';
 import {
   getStoryDataset,
   getSeriesSourceTypes,
@@ -38,6 +38,7 @@ export function AnalyticsSlide({ slide }: AnalyticsSlideProps) {
     ? config.panels.filter((panel) => slide.chartPanelIds?.includes(panel.id))
     : config.panels;
   const compactMode = slide.analyticsMode === 'compact';
+  const storyBullets = getSlideWhatMattersBullets(slide);
 
   return (
     <div className={`analytics-layout${compactMode ? ' analytics-layout-compact' : ''}`}>
@@ -66,7 +67,7 @@ export function AnalyticsSlide({ slide }: AnalyticsSlideProps) {
             <span className="analytics-card-kicker">What matters</span>
             <h2>Story readout</h2>
             <ul className="analytics-list">
-              {slide.bullets?.map((bullet) => <li key={bullet}>{bullet}</li>)}
+              {storyBullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
             </ul>
             <div className="source-pill-row compact-source-row">
               {dataset.sourceTypes.map((sourceType) => (
@@ -83,7 +84,7 @@ export function AnalyticsSlide({ slide }: AnalyticsSlideProps) {
             <span className="analytics-card-kicker">What the chart says</span>
             <h2>Story readout</h2>
             <ul className="analytics-list">
-              {slide.bullets?.map((bullet) => <li key={bullet}>{bullet}</li>)}
+              {storyBullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
             </ul>
           </article>
 
@@ -151,7 +152,7 @@ function MetricPanel({
 
   const domain = resolveDomain(points, thresholds, panel.minValue, panel.maxValue);
   const uniqueDates = [...new Set(points.map((point) => point.date))].sort();
-  const chartHeight = compact ? 196 : 176;
+  const chartHeight = compact ? 214 : 176;
   const chartWidth = 320;
   const padding = { top: 18, right: 12, bottom: 18, left: 12 };
   const minDate = uniqueDates[0];
