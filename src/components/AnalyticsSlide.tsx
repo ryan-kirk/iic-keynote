@@ -45,22 +45,9 @@ export function AnalyticsSlide({ slide }: AnalyticsSlideProps) {
   if (compactMode) {
     return (
       <div className="analytics-layout analytics-layout-story">
-        <div className="analytics-story-column">
-          <div className="analytics-header-block analytics-header-block-story">
-            <h1>{slide.title}</h1>
-            {slide.subtitle ? <p className="lede narrow">{slide.subtitle}</p> : null}
-          </div>
-
-          <aside className="analytics-sidebar analytics-sidebar-story">
-            <article className="analytics-card analytics-story-card">
-              <span className="analytics-card-kicker">What matters</span>
-              <h2>Story readout</h2>
-              <ul className="analytics-list analytics-story-list">
-                {storyBullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
-              </ul>
-              <p className="analytics-story-footer">{config.sourceLabel}</p>
-            </article>
-          </aside>
+        <div className="analytics-header-block analytics-header-block-story">
+          <h1>{slide.title}</h1>
+          {slide.subtitle ? <p className="lede narrow">{slide.subtitle}</p> : null}
         </div>
 
         <div className="analytics-main analytics-main-story">
@@ -78,6 +65,17 @@ export function AnalyticsSlide({ slide }: AnalyticsSlideProps) {
             ))}
           </div>
         </div>
+
+        <aside className="analytics-sidebar analytics-sidebar-story">
+          <article className="analytics-card analytics-story-card">
+            <span className="analytics-card-kicker">What matters</span>
+            <h2>Story readout</h2>
+            <ul className="analytics-list analytics-story-list">
+              {storyBullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+            </ul>
+            <p className="analytics-story-footer">{config.sourceLabel}</p>
+          </article>
+        </aside>
       </div>
     );
   }

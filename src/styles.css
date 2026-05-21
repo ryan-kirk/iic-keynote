@@ -362,9 +362,14 @@ blockquote {
 }
 
 .analytics-layout-story {
-  grid-template-columns: minmax(340px, 1fr) minmax(0, 1.42fr);
-  gap: 28px;
-  align-items: stretch;
+  grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+  grid-template-areas:
+    'header header'
+    'story charts';
+  grid-template-rows: auto 1fr;
+  column-gap: 28px;
+  row-gap: 18px;
+  align-items: start;
 }
 
 .analytics-main {
@@ -372,7 +377,10 @@ blockquote {
 }
 
 .analytics-main-story {
+  grid-area: charts;
+  min-width: 0;
   display: flex;
+  justify-content: flex-end;
 }
 
 .analytics-grid {
@@ -383,26 +391,22 @@ blockquote {
   gap: 16px;
 }
 
-.analytics-story-column {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
 .analytics-header-block-story {
-  max-width: 470px;
+  grid-area: header;
+  max-width: none;
 }
 
 .analytics-header-block-story h1 {
-  font-size: clamp(3.2rem, 5.1vw, 5.3rem);
+  max-width: 1080px;
+  font-size: clamp(3rem, 4.9vw, 5.15rem);
+  line-height: 0.94;
 }
 
 .analytics-header-block-story .lede.narrow {
-  max-width: 430px;
-  margin-top: 22px;
-  font-size: clamp(1.28rem, 2vw, 2rem);
-  line-height: 1.28;
+  max-width: 980px;
+  margin-top: 16px;
+  font-size: clamp(1.2rem, 1.75vw, 1.7rem);
+  line-height: 1.26;
 }
 
 .analytics-sidebar {
@@ -416,31 +420,33 @@ blockquote {
 }
 
 .analytics-sidebar-story {
-  margin-top: auto;
+  grid-area: story;
+  align-self: end;
+  margin-top: 0;
 }
 
 .analytics-story-card {
-  width: min(100%, 470px);
-  padding: 26px 28px 18px;
-  border-radius: 42px;
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.18);
+  width: min(100%, 420px);
+  padding: 22px 24px 18px;
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 .analytics-story-card h2 {
-  margin-top: 10px;
-  font-size: clamp(1.85rem, 2.2vw, 2.45rem);
+  margin-top: 8px;
+  font-size: clamp(1.7rem, 2vw, 2.2rem);
 }
 
 .analytics-story-list {
-  margin-top: 18px;
-  padding-left: 1.4rem;
-  gap: 24px;
+  margin-top: 16px;
+  padding-left: 1.25rem;
+  gap: 18px;
 }
 
 .analytics-story-list li {
-  font-size: clamp(1.18rem, 1.9vw, 1.82rem);
-  line-height: 1.24;
+  font-size: clamp(1.04rem, 1.35vw, 1.38rem);
+  line-height: 1.28;
 }
 
 .analytics-story-list li::marker {
@@ -448,22 +454,18 @@ blockquote {
 }
 
 .analytics-story-footer {
-  margin: 28px 0 0;
-  font-size: 1.04rem;
+  margin: 22px 0 0;
+  font-size: 0.98rem;
   line-height: 1.25;
   color: inherit;
   opacity: 0.82;
 }
 
 .analytics-story-stack {
-  width: 100%;
+  width: min(100%, 820px);
   display: flex;
   flex-direction: column;
-  gap: 18px;
-}
-
-.analytics-story-stack .chart-card:nth-child(2n) {
-  margin-left: clamp(0px, 5vw, 74px);
+  gap: 16px;
 }
 
 .analytics-card h2,
@@ -642,17 +644,17 @@ blockquote {
 }
 
 .chart-card-compact {
-  padding: 18px 20px 20px;
-  gap: 16px;
+  padding: 18px 22px 18px;
+  gap: 14px;
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.115);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .chart-card-compact h2 {
-  margin-top: 8px;
+  margin-top: 6px;
   font-family: 'Fraunces', serif;
-  font-size: clamp(1.45rem, 2.05vw, 1.95rem);
+  font-size: clamp(1.35rem, 1.8vw, 1.7rem);
   line-height: 1.05;
 }
 
@@ -732,7 +734,7 @@ blockquote {
 }
 
 .chart-card-compact .metric-chart {
-  height: 256px;
+  height: 214px;
 }
 
 .chart-shell {
@@ -1046,18 +1048,20 @@ blockquote {
 
   .analytics-layout-story {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      'header'
+      'story'
+      'charts';
+    row-gap: 22px;
   }
 
   .analytics-sidebar-story {
     margin-top: 0;
+    align-self: start;
   }
 
   .analytics-story-card {
     width: 100%;
-  }
-
-  .analytics-story-stack .chart-card:nth-child(2n) {
-    margin-left: 0;
   }
 
   .author-layout {
@@ -1097,7 +1101,7 @@ blockquote {
   }
 
   .chart-card-compact .metric-chart {
-    height: 222px;
+    height: 206px;
   }
 
   .chart-legend-column {
