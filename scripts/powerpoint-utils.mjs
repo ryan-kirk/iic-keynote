@@ -13,7 +13,9 @@ import {
   formatAxisDate,
   formatThreshold,
   getPanelThresholds,
+  resolveChartDateDomain,
   resolveDomain,
+  resolveWindowBounds,
   scaleDate,
   scaleValue,
 } from '../src/data/storyChartPresentation.ts';
@@ -35,7 +37,7 @@ const SVG_COLORS = {
   muted: '#cfd8d1',
   line: '#ffffff',
   grid: '#ffffff22',
-  window: '#ffffff14',
+  window: '#d4a846',
   shell: '#173126',
   stroke: '#ffffff1f',
   watch: '#d4a846',
@@ -213,9 +215,7 @@ function renderChartCardSvg({ dataset, panel }) {
   const panelSeries = buildPanelSeries(panel, dataset.records);
   const points = panelSeries.flatMap((series) => series.points);
   const thresholds = getPanelThresholds(panel, dataset.thresholds);
-  const uniqueDates = [...new Set(points.map((point) => point.date))].sort();
-  const minDate = uniqueDates[0];
-  const maxDate = uniqueDates[uniqueDates.length - 1];
+  const { minDate, maxDate } = resolveChartDateDomain(points, dataset.records, dataset.comparisonWindows);
   const domain = resolveDomain(points, thresholds, panel.minValue, panel.maxValue);
   const showZeroAxis = domain.min <= 0 && domain.max >= 0;
   const titleFontSize = resolveChartTitleFontSize(panel.title);
@@ -229,12 +229,18 @@ function renderChartCardSvg({ dataset, panel }) {
 
   const comparisonWindowsMarkup = dataset.comparisonWindows
     .map((window) => {
-      const x = chartBounds.x + scaleDate(window.startDate, minDate, maxDate, chartBounds.w, plotPadding.left, plotPadding.right);
-      const nextX =
-        chartBounds.x + scaleDate(window.endDate, minDate, maxDate, chartBounds.w, plotPadding.left, plotPadding.right);
-      return `<rect x="${round(x)}" y="${chartBounds.y + plotPadding.top}" width="${round(
-        Math.max(nextX - x, 4),
-      )}" height="${chartBounds.h - plotPadding.top - plotPadding.bottom}" rx="10" fill="${SVG_COLORS.window}" />`;
+      const windowRect = resolveWindowBounds(
+        window.startDate,
+        window.endDate,
+        minDate,
+        maxDate,
+        chartBounds.w,
+        plotPadding.left,
+        plotPadding.right,
+      );
+      return `<rect x="${round(chartBounds.x + windowRect.x)}" y="${chartBounds.y + plotPadding.top}" width="${round(
+        windowRect.width,
+      )}" height="${chartBounds.h - plotPadding.top - plotPadding.bottom}" rx="10" fill="${SVG_COLORS.window}" fill-opacity="0.22" />`;
     })
     .join('');
 

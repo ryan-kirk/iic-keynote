@@ -167,7 +167,7 @@ export const storyVisualConfigs: Record<StoryId, StoryVisualConfig> = {
         title: 'Synthetic scout triage example',
         eyebrow: 'Synthetic workflow example',
         description:
-          'Synthetic scout-priority events show where agronomist attention becomes most urgent after the stress windows appear.',
+          'Synthetic scout-priority score rises through both stress windows, while the zone-level annotations preserve the specific handoff moments.',
         minValue: 0,
         maxValue: 100,
         series: [{ metricKey: 'scout_attention_score', label: 'Attention score', color: palette.gold }],

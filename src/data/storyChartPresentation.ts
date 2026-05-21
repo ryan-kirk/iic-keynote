@@ -1,4 +1,4 @@
-import type { ChartRecord, StoryPanelConfig, ThresholdRule } from './storyChartShared.ts';
+import type { ChartRecord, ComparisonWindow, StoryPanelConfig, ThresholdRule } from './storyChartShared.ts';
 import { formatMetricValue } from './storyChartShared.ts';
 
 export interface PanelPoint {
@@ -40,6 +40,45 @@ export function buildPanelSeries(panel: StoryPanelConfig, records: ChartRecord[]
       })),
     };
   });
+}
+
+export function resolveChartDateDomain(
+  points: PanelPoint[],
+  storyRecords: ChartRecord[],
+  comparisonWindows: ComparisonWindow[],
+) {
+  const pointDates = points.map((point) => point.date);
+  const windowDates = comparisonWindows.flatMap((window) => [window.startDate, window.endDate]);
+  const useStoryDates = points.length <= 2 || points.every((point) => point.timeGrain === 'event');
+  const storyDates = useStoryDates ? storyRecords.filter((record) => record.timeGrain !== 'event').map((record) => record.date) : [];
+  const dates = [...pointDates, ...windowDates, ...storyDates].sort();
+
+  return {
+    minDate: dates[0],
+    maxDate: dates[dates.length - 1],
+  };
+}
+
+export function resolveWindowBounds(
+  startDate: string,
+  endDate: string,
+  minDate: string,
+  maxDate: string,
+  chartWidth: number,
+  leftPadding: number,
+  rightPadding: number,
+) {
+  const start = scaleDate(startDate, minDate, maxDate, chartWidth, leftPadding, rightPadding);
+  const end = scaleDate(endDate, minDate, maxDate, chartWidth, leftPadding, rightPadding);
+  const minX = leftPadding;
+  const maxX = chartWidth - rightPadding;
+  const x = clamp(Math.min(start, end), minX, maxX);
+  const clippedEnd = clamp(Math.max(start, end), minX, maxX);
+
+  return {
+    x,
+    width: Math.max(clippedEnd - x, 4),
+  };
 }
 
 export function resolveDomain(
@@ -114,6 +153,10 @@ export function scaleValue(
 
 export function dateToNumber(value: string) {
   return new Date(`${value}T00:00:00`).getTime();
+}
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
 }
 
 export function formatAxisDate(value: string) {

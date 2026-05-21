@@ -63,5 +63,23 @@ date,timeGrain,storyId,entityId,metricKey,metricLabel,value,unit,sourceType,sour
 2024-05-04,event,precision_agronomy,demo_field_01_zone_b,n_applied_lb_ac,N Applied,154,lb/ac,illustrative,Phase 2 synthetic series,Core management zone rate.
 2024-05-04,event,precision_agronomy,demo_field_01_zone_c,n_applied_lb_ac,N Applied,142,lb/ac,illustrative,Phase 2 synthetic series,Moderate-rate zone for variable-rate demo field.
 2024-05-04,event,precision_agronomy,demo_field_01_zone_d,n_applied_lb_ac,N Applied,128,lb/ac,illustrative,Phase 2 synthetic series,Lower-productivity zone rate.
-2024-06-21,event,precision_agronomy,demo_field_01_zone_b,scout_attention_score,Scout Attention Score,72,index,illustrative,Phase 2 synthetic series,Zone flagged for manual review during the first anomaly window.
-2024-07-18,event,precision_agronomy,demo_field_01_zone_c,scout_attention_score,Scout Attention Score,88,index,illustrative,Phase 2 synthetic series,Zone receives highest review priority during second stress window.
+2024-05-06,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,18,index,illustrative,Phase 2 synthetic series,Baseline field review stays in the normal monitoring range.
+2024-05-13,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,16,index,illustrative,Phase 2 synthetic series,Healthy early vigor keeps triage urgency low.
+2024-05-20,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,18,index,illustrative,Phase 2 synthetic series,Routine scouting remains sufficient during rapid growth.
+2024-05-27,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,22,index,illustrative,Phase 2 synthetic series,Dry pockets begin to merit closer agronomy review.
+2024-06-03,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,28,index,illustrative,Phase 2 synthetic series,Moisture variability keeps weaker zones on the follow-up list.
+2024-06-10,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,34,index,illustrative,Phase 2 synthetic series,Heat and dryness raise the likelihood of targeted field checks.
+2024-06-17,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,52,index,illustrative,Phase 2 synthetic series,The first stress window opens and pushes the field into active review.
+2024-06-24,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,72,index,illustrative,Phase 2 synthetic series,Zone B reaches manual-review priority during the first stress window.
+2024-07-01,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,46,index,illustrative,Phase 2 synthetic series,Rainfall reduces immediate urgency but not the need for follow-up.
+2024-07-08,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,38,index,illustrative,Phase 2 synthetic series,The field stays on the review queue while recovery remains uneven.
+2024-07-15,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,58,index,illustrative,Phase 2 synthetic series,The second stress window starts to rebuild triage pressure.
+2024-07-22,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,88,index,illustrative,Phase 2 synthetic series,Zone C becomes the highest-priority review target in late July.
+2024-07-29,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,64,index,illustrative,Phase 2 synthetic series,Late-July rain softens the peak but keeps agronomist attention elevated.
+2024-08-05,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,48,index,illustrative,Phase 2 synthetic series,Residual variability still warrants targeted scouting in weaker zones.
+2024-08-12,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,34,index,illustrative,Phase 2 synthetic series,Recovery narrows the queue back toward routine review.
+2024-08-19,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,24,index,illustrative,Phase 2 synthetic series,Most areas return to normal monitoring.
+2024-08-26,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,20,index,illustrative,Phase 2 synthetic series,Late-season heat is noted without triggering a new escalation.
+2024-09-02,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,18,index,illustrative,Phase 2 synthetic series,Pre-harvest canopy decline does not add meaningful triage pressure.
+2024-09-09,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,24,index,illustrative,Phase 2 synthetic series,Season-end follow-up keeps weaker zones visible in the agronomy notes.
+2024-09-16,weekly,precision_agronomy,demo_field_01,scout_attention_score,Scout Attention Score,28,index,illustrative,Phase 2 synthetic series,Closeout review captures any remaining underperforming areas before harvest.

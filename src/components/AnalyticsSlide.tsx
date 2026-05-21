@@ -17,7 +17,9 @@ import {
   formatSourceTypeLabel,
   formatThreshold,
   getPanelThresholds,
+  resolveChartDateDomain,
   resolveDomain,
+  resolveWindowBounds,
   scaleDate,
   scaleValue,
 } from '../data/storyChartPresentation';
@@ -174,12 +176,10 @@ function MetricPanel({
   }
 
   const domain = resolveDomain(points, thresholds, panel.minValue, panel.maxValue);
-  const uniqueDates = [...new Set(points.map((point) => point.date))].sort();
   const chartHeight = compact ? 240 : 176;
   const chartWidth = compact ? 420 : 320;
   const padding = compact ? { top: 20, right: 14, bottom: 22, left: 14 } : { top: 18, right: 12, bottom: 18, left: 12 };
-  const minDate = uniqueDates[0];
-  const maxDate = uniqueDates[uniqueDates.length - 1];
+  const { minDate, maxDate } = resolveChartDateDomain(points, records, comparisonWindows);
   const panelSourceTypes = storyId ? getSeriesSourceTypes(storyId, panel.series.map((series) => series.metricKey)) : [];
   const showZeroAxis = domain.min <= 0 && domain.max >= 0;
 
@@ -232,16 +232,23 @@ function MetricPanel({
         <rect className="chart-shell" x="0" y="0" width={chartWidth} height={chartHeight} rx="20" />
 
         {comparisonWindows.map((window) => {
-          const x = scaleDate(window.startDate, minDate, maxDate, chartWidth, padding.left, padding.right);
-          const nextX = scaleDate(window.endDate, minDate, maxDate, chartWidth, padding.left, padding.right);
+          const windowRect = resolveWindowBounds(
+            window.startDate,
+            window.endDate,
+            minDate,
+            maxDate,
+            chartWidth,
+            padding.left,
+            padding.right,
+          );
 
           return (
             <rect
               className="chart-window"
               key={window.id}
-              x={x}
+              x={windowRect.x}
               y={padding.top}
-              width={Math.max(nextX - x, 4)}
+              width={windowRect.width}
               height={chartHeight - padding.top - padding.bottom}
             />
           );
