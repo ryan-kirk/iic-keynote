@@ -40,12 +40,54 @@ export function AnalyticsSlide({ slide }: AnalyticsSlideProps) {
   const compactMode = slide.analyticsMode === 'compact';
   const storyBullets = getSlideWhatMattersBullets(slide);
 
+  if (compactMode) {
+    return (
+      <div className="analytics-layout analytics-layout-story">
+        <div className="analytics-story-column">
+          <div className="analytics-header-block analytics-header-block-story">
+            <h1>{slide.title}</h1>
+            {slide.subtitle ? <p className="lede narrow">{slide.subtitle}</p> : null}
+          </div>
+
+          <aside className="analytics-sidebar analytics-sidebar-story">
+            <article className="analytics-card analytics-story-card">
+              <span className="analytics-card-kicker">What matters</span>
+              <h2>Story readout</h2>
+              <ul className="analytics-list analytics-story-list">
+                {storyBullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+              </ul>
+              <p className="analytics-story-footer">{config.sourceLabel}</p>
+            </article>
+          </aside>
+        </div>
+
+        <div className="analytics-main analytics-main-story">
+          <div className="analytics-story-stack">
+            {panels.map((panel) => (
+              <MetricPanel
+                storyId={slide.chartStoryId}
+                key={panel.id}
+                panel={panel}
+                records={dataset.records}
+                thresholds={getPanelThresholds(panel, dataset.thresholds)}
+                comparisonWindows={dataset.comparisonWindows}
+                compact
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={`analytics-layout${compactMode ? ' analytics-layout-compact' : ''}`}>
-      <div className="analytics-main">
+    <div className="analytics-layout">
+      <div className="analytics-header-block">
         <h1>{slide.title}</h1>
         {slide.subtitle ? <p className="lede narrow">{slide.subtitle}</p> : null}
+      </div>
 
+      <div className="analytics-main">
         <div className="analytics-grid">
           {panels.map((panel) => (
             <MetricPanel
@@ -61,69 +103,50 @@ export function AnalyticsSlide({ slide }: AnalyticsSlideProps) {
         </div>
       </div>
 
-      {compactMode ? (
-        <aside className="analytics-sidebar analytics-sidebar-compact">
-          <article className="analytics-card">
-            <span className="analytics-card-kicker">What matters</span>
-            <h2>Story readout</h2>
-            <ul className="analytics-list">
-              {storyBullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
-            </ul>
-            <div className="source-pill-row compact-source-row">
-              {dataset.sourceTypes.map((sourceType) => (
-                <span className={`source-pill source-${sourceType}`} key={sourceType}>
-                  {formatSourceTypeLabel(sourceType)}
-                </span>
-              ))}
-            </div>
-          </article>
-        </aside>
-      ) : (
-        <aside className="analytics-sidebar">
-          <article className="analytics-card">
-            <span className="analytics-card-kicker">What the chart says</span>
-            <h2>Story readout</h2>
-            <ul className="analytics-list">
-              {storyBullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
-            </ul>
-          </article>
+      <aside className="analytics-sidebar">
+        <article className="analytics-card">
+          <span className="analytics-card-kicker">What the chart says</span>
+          <h2>Story readout</h2>
+          <ul className="analytics-list">
+            {storyBullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+          </ul>
+        </article>
 
-          <article className="analytics-card">
-            <span className="analytics-card-kicker">Thresholds</span>
-            <h2>What moves this from noise to action</h2>
-            <div className="threshold-stack">
-              {dataset.thresholds.map((threshold) => (
-                <div className={`threshold-row severity-${threshold.severity}`} key={threshold.id}>
-                  <strong>{formatThreshold(threshold)}</strong>
-                  <p>{threshold.meaning}</p>
-                </div>
-              ))}
-            </div>
-          </article>
+        <article className="analytics-card">
+          <span className="analytics-card-kicker">Thresholds</span>
+          <h2>What moves this from noise to action</h2>
+          <div className="threshold-stack">
+            {dataset.thresholds.map((threshold) => (
+              <div className={`threshold-row severity-${threshold.severity}`} key={threshold.id}>
+                <strong>{formatThreshold(threshold)}</strong>
+                <p>{threshold.meaning}</p>
+              </div>
+            ))}
+          </div>
+        </article>
 
-          <article className="analytics-card">
-            <span className="analytics-card-kicker">Annotations</span>
-            <h2>Context kept visible</h2>
-            <div className="annotation-stack">
-              {dataset.annotations.slice(0, 4).map((annotation) => (
-                <AnnotationRow annotation={annotation} key={`${annotation.date}-${annotation.label}`} />
-              ))}
-            </div>
-          </article>
+        <article className="analytics-card">
+          <span className="analytics-card-kicker">Annotations</span>
+          <h2>Context kept visible</h2>
+          <div className="annotation-stack">
+            {dataset.annotations.slice(0, 4).map((annotation) => (
+              <AnnotationRow annotation={annotation} key={`${annotation.date}-${annotation.label}`} />
+            ))}
+          </div>
+        </article>
 
-          <article className="analytics-card">
-            <span className="analytics-card-kicker">Data mix</span>
-            <h2>{config.sourceLabel}</h2>
-            <div className="source-pill-row">
-              {dataset.sourceTypes.map((sourceType) => (
-                <span className={`source-pill source-${sourceType}`} key={sourceType}>
-                  {formatSourceTypeLabel(sourceType)}
-                </span>
-              ))}
-            </div>
-          </article>
-        </aside>
-      )}
+        <article className="analytics-card">
+          <span className="analytics-card-kicker">Data mix</span>
+          <h2>{config.sourceLabel}</h2>
+          <div className="source-pill-row">
+            {dataset.sourceTypes.map((sourceType) => (
+              <span className={`source-pill source-${sourceType}`} key={sourceType}>
+                {formatSourceTypeLabel(sourceType)}
+              </span>
+            ))}
+          </div>
+        </article>
+      </aside>
     </div>
   );
 }
@@ -152,44 +175,57 @@ function MetricPanel({
 
   const domain = resolveDomain(points, thresholds, panel.minValue, panel.maxValue);
   const uniqueDates = [...new Set(points.map((point) => point.date))].sort();
-  const chartHeight = compact ? 214 : 176;
-  const chartWidth = 320;
-  const padding = { top: 18, right: 12, bottom: 18, left: 12 };
+  const chartHeight = compact ? 240 : 176;
+  const chartWidth = compact ? 420 : 320;
+  const padding = compact ? { top: 20, right: 14, bottom: 22, left: 14 } : { top: 18, right: 12, bottom: 18, left: 12 };
   const minDate = uniqueDates[0];
   const maxDate = uniqueDates[uniqueDates.length - 1];
   const panelSourceTypes = storyId ? getSeriesSourceTypes(storyId, panel.series.map((series) => series.metricKey)) : [];
   const showZeroAxis = domain.min <= 0 && domain.max >= 0;
 
   return (
-    <article className="chart-card">
-      <div className="chart-card-header">
+    <article className={`chart-card${compact ? ' chart-card-compact' : ''}`}>
+      <div className={`chart-card-header${compact ? ' chart-card-header-compact' : ''}`}>
         <div>
           <span className="analytics-card-kicker">{panel.eyebrow}</span>
           <h2>{panel.title}</h2>
           {!compact ? <p className="chart-description">{panel.description}</p> : null}
-          <div className="panel-source-row">
-            {panelSourceTypes.map((sourceType) => (
-              <span className={`source-pill source-${sourceType}`} key={`${panel.id}-${sourceType}`}>
-                {formatSourceTypeLabel(sourceType)}
-              </span>
+          {!compact ? (
+            <div className="panel-source-row">
+              {panelSourceTypes.map((sourceType) => (
+                <span className={`source-pill source-${sourceType}`} key={`${panel.id}-${sourceType}`}>
+                  {formatSourceTypeLabel(sourceType)}
+                </span>
+              ))}
+            </div>
+          ) : null}
+        </div>
+        {compact ? (
+          <div className="chart-legend-row chart-legend-row-compact">
+            {panelSeries.map((series) => (
+              <div className="chart-legend-chip-label" key={series.metricKey}>
+                <span className="legend-chip" style={{ backgroundColor: series.color }} />
+                <strong>{series.label}</strong>
+              </div>
             ))}
           </div>
-        </div>
-        <div className="chart-legend-column">
-          {panelSeries.map((series) => {
-            const latestPoint = series.points[series.points.length - 1];
+        ) : (
+          <div className="chart-legend-column">
+            {panelSeries.map((series) => {
+              const latestPoint = series.points[series.points.length - 1];
 
-            return (
-              <div className="chart-legend-item" key={series.metricKey}>
-                <span className="legend-chip" style={{ backgroundColor: series.color }} />
-                <div>
-                  <strong>{series.label}</strong>
-                  <span>{formatPanelValue(series.metricKey, latestPoint.value, panel.displayMode)}</span>
+              return (
+                <div className="chart-legend-item" key={series.metricKey}>
+                  <span className="legend-chip" style={{ backgroundColor: series.color }} />
+                  <div>
+                    <strong>{series.label}</strong>
+                    <span>{formatPanelValue(series.metricKey, latestPoint.value, panel.displayMode)}</span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       <svg className="metric-chart" viewBox={`0 0 ${chartWidth} ${chartHeight}`} role="img" aria-label={panel.title}>

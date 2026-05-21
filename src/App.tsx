@@ -34,8 +34,11 @@ export default function App() {
   return (
     <main className="app-shell">
       <DeckChrome
+        kicker={presentationMeta.appKicker}
         title={presentationMeta.title}
-        subtitle={presentationMeta.exportNote}
+        description={presentationMeta.appDescription}
+        downloadHref={presentationMeta.powerpointDownloadHref}
+        downloadLabel={presentationMeta.powerpointDownloadLabel}
         currentSlide={currentSlide}
         totalSlides={slides.length}
         onPrevious={() => setCurrentSlide((value) => Math.max(value - 1, 0))}

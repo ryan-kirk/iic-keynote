@@ -85,6 +85,36 @@ button {
   color: var(--muted);
 }
 
+.deck-sidebar-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.deck-sidebar-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.8rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
+}
+
+.deck-sidebar-link:hover {
+  transform: translateY(-1px);
+}
+
+.deck-sidebar-link-primary {
+  color: var(--white);
+  background: linear-gradient(135deg, var(--forest), #355d4b);
+  box-shadow: 0 14px 30px rgba(36, 71, 54, 0.18);
+}
+
 .deck-progress {
   width: 100%;
   height: 8px;
@@ -321,13 +351,28 @@ blockquote {
   align-items: start;
 }
 
+.analytics-header-block {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
 .analytics-layout-compact {
   grid-template-columns: minmax(0, 2.05fr) 290px;
   gap: 18px;
 }
 
+.analytics-layout-story {
+  grid-template-columns: minmax(340px, 1fr) minmax(0, 1.42fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
 .analytics-main {
   min-width: 0;
+}
+
+.analytics-main-story {
+  display: flex;
 }
 
 .analytics-grid {
@@ -338,6 +383,28 @@ blockquote {
   gap: 16px;
 }
 
+.analytics-story-column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.analytics-header-block-story {
+  max-width: 470px;
+}
+
+.analytics-header-block-story h1 {
+  font-size: clamp(3.2rem, 5.1vw, 5.3rem);
+}
+
+.analytics-header-block-story .lede.narrow {
+  max-width: 430px;
+  margin-top: 22px;
+  font-size: clamp(1.28rem, 2vw, 2rem);
+  line-height: 1.28;
+}
+
 .analytics-sidebar {
   display: grid;
   gap: 16px;
@@ -345,19 +412,211 @@ blockquote {
 
 .analytics-sidebar-compact {
   align-content: start;
+  margin-top: 28px;
 }
 
-.analytics-layout-compact h1 {
-  font-size: clamp(3rem, 4.8vw, 4.9rem);
+.analytics-sidebar-story {
+  margin-top: auto;
 }
 
-.analytics-layout-compact .lede.narrow {
-  max-width: 760px;
+.analytics-story-card {
+  width: min(100%, 470px);
+  padding: 26px 28px 18px;
+  border-radius: 42px;
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.analytics-story-card h2 {
+  margin-top: 10px;
+  font-size: clamp(1.85rem, 2.2vw, 2.45rem);
+}
+
+.analytics-story-list {
+  margin-top: 18px;
+  padding-left: 1.4rem;
+  gap: 24px;
+}
+
+.analytics-story-list li {
+  font-size: clamp(1.18rem, 1.9vw, 1.82rem);
+  line-height: 1.24;
+}
+
+.analytics-story-list li::marker {
+  color: #d4a846;
+}
+
+.analytics-story-footer {
+  margin: 28px 0 0;
+  font-size: 1.04rem;
+  line-height: 1.25;
+  color: inherit;
+  opacity: 0.82;
+}
+
+.analytics-story-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.analytics-story-stack .chart-card:nth-child(2n) {
+  margin-left: clamp(0px, 5vw, 74px);
 }
 
 .analytics-card h2,
 .chart-card h2 {
   margin-top: 6px;
+}
+
+.author-layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+.author-header-block {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.author-profile-card {
+  padding: 24px 22px;
+  display: grid;
+  gap: 22px;
+  justify-items: center;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(36, 71, 54, 0.08);
+  box-shadow: 0 24px 60px rgba(29, 43, 34, 0.12);
+}
+
+.author-profile-hero {
+  width: 100%;
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+}
+
+.author-photo-shell {
+  overflow: hidden;
+  width: min(100%, 270px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 10px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(236, 242, 238, 0.96));
+  border: 1px solid rgba(36, 71, 54, 0.12);
+  box-shadow: 0 22px 42px rgba(29, 43, 34, 0.12);
+}
+
+.author-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  border-radius: 50%;
+}
+
+.author-profile-copy {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+}
+
+.author-role,
+.author-connect-kicker {
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #2f58d8;
+  font-weight: 800;
+}
+
+.author-profile-copy h2,
+.author-connect-copy h3,
+.author-highlight-card h3 {
+  margin: 0;
+  color: var(--ink);
+}
+
+.author-profile-copy h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  line-height: 0.98;
+}
+
+.author-profile-copy p,
+.author-connect-copy p,
+.author-highlight-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.author-profile-copy p {
+  max-width: 30ch;
+}
+
+.author-connect-row {
+  width: min(100%, 430px);
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+}
+
+.author-qr-shell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(36, 71, 54, 0.1);
+  box-shadow: 0 20px 36px rgba(29, 43, 34, 0.08);
+}
+
+.author-qr {
+  display: block;
+  width: 100%;
+  max-width: 216px;
+  aspect-ratio: 1;
+}
+
+.author-connect-copy {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+
+.author-highlights {
+  display: grid;
+  gap: 18px;
+}
+
+.author-highlight-card {
+  padding: 22px 24px;
+  border-radius: 24px;
+  border: 1px solid rgba(36, 71, 54, 0.08);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.author-highlight-sky {
+  background: linear-gradient(135deg, rgba(228, 238, 255, 0.96), rgba(238, 245, 255, 0.86));
+}
+
+.author-highlight-lavender {
+  background: linear-gradient(135deg, rgba(241, 232, 250, 0.96), rgba(247, 240, 253, 0.9));
+}
+
+.author-highlight-sage {
+  background: linear-gradient(135deg, rgba(227, 243, 234, 0.96), rgba(239, 249, 243, 0.9));
 }
 
 .analytics-card-kicker,
@@ -382,8 +641,19 @@ blockquote {
   gap: 12px;
 }
 
-.analytics-layout-compact .chart-card {
-  gap: 10px;
+.chart-card-compact {
+  padding: 18px 20px 20px;
+  gap: 16px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.chart-card-compact h2 {
+  margin-top: 8px;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.45rem, 2.05vw, 1.95rem);
+  line-height: 1.05;
 }
 
 .chart-card-header {
@@ -391,6 +661,11 @@ blockquote {
   justify-content: space-between;
   gap: 12px;
   align-items: flex-start;
+}
+
+.chart-card-header-compact {
+  flex-direction: column;
+  gap: 12px;
 }
 
 .chart-description {
@@ -414,10 +689,29 @@ blockquote {
   min-width: 132px;
 }
 
+.chart-legend-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chart-legend-row-compact {
+  gap: 12px 22px;
+}
+
 .chart-legend-item {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.chart-legend-chip-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chart-legend-chip-label strong {
+  font-size: 1rem;
 }
 
 .chart-legend-item div {
@@ -437,12 +731,16 @@ blockquote {
   height: 188px;
 }
 
-.analytics-layout-compact .metric-chart {
-  height: 224px;
+.chart-card-compact .metric-chart {
+  height: 256px;
 }
 
 .chart-shell {
   fill: rgba(255, 255, 255, 0.06);
+}
+
+.analytics-layout-story .chart-shell {
+  fill: rgba(15, 59, 40, 0.92);
 }
 
 .tone-light .chart-shell {
@@ -746,7 +1044,23 @@ blockquote {
     grid-template-columns: 1fr;
   }
 
-  .analytics-sidebar-compact {
+  .analytics-layout-story {
+    grid-template-columns: 1fr;
+  }
+
+  .analytics-sidebar-story {
+    margin-top: 0;
+  }
+
+  .analytics-story-card {
+    width: 100%;
+  }
+
+  .analytics-story-stack .chart-card:nth-child(2n) {
+    margin-left: 0;
+  }
+
+  .author-layout {
     grid-template-columns: 1fr;
   }
 }
@@ -770,14 +1084,20 @@ blockquote {
   .process-row,
   .two-column-grid,
   .timeline-item,
-  .analytics-grid,
   .analytics-layout,
+  .analytics-grid,
+  .analytics-layout-story,
+  .author-connect-row,
   .annotation-row {
     grid-template-columns: 1fr;
   }
 
   .chart-card-header {
     flex-direction: column;
+  }
+
+  .chart-card-compact .metric-chart {
+    height: 222px;
   }
 
   .chart-legend-column {

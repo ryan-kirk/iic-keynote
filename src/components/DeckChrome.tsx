@@ -1,6 +1,9 @@
 interface DeckChromeProps {
+  kicker: string;
   title: string;
-  subtitle: string;
+  description: string;
+  downloadHref: string;
+  downloadLabel: string;
   currentSlide: number;
   totalSlides: number;
   onPrevious: () => void;
@@ -8,8 +11,11 @@ interface DeckChromeProps {
 }
 
 export function DeckChrome({
+  kicker,
   title,
-  subtitle,
+  description,
+  downloadHref,
+  downloadLabel,
   currentSlide,
   totalSlides,
   onPrevious,
@@ -18,9 +24,14 @@ export function DeckChrome({
   return (
     <>
       <aside className="deck-sidebar">
-        <span className="deck-kicker">Local deck demo</span>
+        <span className="deck-kicker">{kicker}</span>
         <h2>{title}</h2>
-        <p>{subtitle}</p>
+        <p>{description}</p>
+        <div className="deck-sidebar-actions">
+          <a className="deck-sidebar-link deck-sidebar-link-primary" href={downloadHref} download>
+            {downloadLabel}
+          </a>
+        </div>
         <div className="deck-progress">
           <div
             className="deck-progress-fill"

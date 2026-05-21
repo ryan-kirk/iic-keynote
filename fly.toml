@@ -1,5 +1,5 @@
 # Update the app name before first deploy if you want a different public hostname.
-app = "rakirk-iic-keynote"
+app = "ryankirk-iic-keynote"
 primary_region = "ord"
 kill_signal = "SIGQUIT"
 kill_timeout = "5s"

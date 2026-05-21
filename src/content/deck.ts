@@ -32,6 +32,7 @@ export type SlideLayout =
   | 'quote'
   | 'timeline'
   | 'next-steps'
+  | 'author-profile'
   | 'closing';
 
 export type StoryId = 'margin_pressure' | 'precision_agronomy' | 'grain_logistics';
@@ -64,6 +65,23 @@ export interface TimelineItem {
   detail: string;
 }
 
+export interface AuthorHighlight {
+  title: string;
+  detail: string;
+  accent: 'sky' | 'lavender' | 'sage';
+}
+
+export interface AuthorProfile {
+  name: string;
+  role: string;
+  summary: string;
+  photoSrc: string;
+  qrSrc: string;
+  qrLabel: string;
+  qrCaption: string;
+  highlights: AuthorHighlight[];
+}
+
 export interface SlideDefinition {
   id: string;
   eyebrow: string;
@@ -84,6 +102,7 @@ export interface SlideDefinition {
   trends?: TrendItem[];
   steps?: StepItem[];
   timeline?: TimelineItem[];
+  authorProfile?: AuthorProfile;
   speakerNotes?: string[];
   quote?: string;
   quoteAttribution?: string;
@@ -96,8 +115,11 @@ export const presentationMeta = {
   subtitle: 'A data-and-AI narrative built around signals, thresholds, and co-op operating examples',
   audience: 'Agricultural professionals and interns',
   event: 'One-day Iowa co-op trends session',
-  exportNote:
-    'Slides are defined as structured content objects so the same source can later map into PowerPoint or PDF export workflows.',
+  appKicker: 'Public keynote deck',
+  appDescription:
+    'A keynote on how data, AI, and earlier signal interpretation are reshaping Iowa agricultural co-ops across margin pressure, precision agronomy, and grain logistics.',
+  powerpointDownloadHref: '/downloads/iowa-co-op-keynote.pptx',
+  powerpointDownloadLabel: 'Download PowerPoint slides',
 };
 
 export function getSlideWhatMattersBullets(slide: SlideDefinition): string[] {
@@ -529,6 +551,50 @@ export const slides: SlideDefinition[] = [
     subtitle: 'The co-ops that interpret signals earlier will be the ones that use data and AI to serve members more effectively.',
     layout: 'closing',
     tone: 'hero',
+  },
+  {
+    id: 'author',
+    eyebrow: 'About the Author',
+    title: 'About Ryan Kirk',
+    subtitle: 'Digital agriculture, applied AI, and decision support leadership grounded in real operating outcomes.',
+    layout: 'author-profile',
+    tone: 'light',
+    authorProfile: {
+      name: 'Ryan Kirk',
+      role: 'Digital agriculture and applied AI leader',
+      summary:
+        'Former Head of Data Science at John Deere, focused on turning data, analytics, and AI into practical decisions across the agricultural ecosystem.',
+      photoSrc: '/author/kirk-ryan-005-portrait.jpg',
+      qrSrc: '/author/blinq.png',
+      qrLabel: 'Scan to connect on Blinq',
+      qrCaption:
+        'Use the QR code for post-session follow-up on applied AI, digital agronomy, and resilient decision support systems.',
+      highlights: [
+        {
+          title: 'Digital agriculture leadership',
+          detail:
+            'Helped shape how data science, analytics, and AI support decisions across the agricultural ecosystem at John Deere.',
+          accent: 'sky',
+        },
+        {
+          title: 'Decision support systems expertise',
+          detail:
+            'Holds a PhD in Human-Computer Interaction focused on decision support systems in veterinary and clinical settings.',
+          accent: 'lavender',
+        },
+        {
+          title: 'Applied AI for agronomy and operations',
+          detail:
+            'Works at the intersection of agronomy, data products, and emerging technology to build connected, intelligent, resilient decision support systems.',
+          accent: 'sage',
+        },
+      ],
+    },
+    speakerNotes: [
+      'Source summary from author/Bio.md.',
+      'Emphasize the through-line from digital agriculture leadership to practical decision support, not generic technology hype.',
+      'Invite follow-up conversations on applied AI, agronomy workflows, and data products using the Blinq QR code.',
+    ],
   },
 ];
 

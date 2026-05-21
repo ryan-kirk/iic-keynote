@@ -28,8 +28,10 @@ const COLORS = {
 };
 
 const outputPath = path.join(POWERPOINT_OUTPUT_DIR, 'iowa-co-op-keynote.pptx');
+const downloadOutputPath = path.resolve(process.cwd(), 'public/downloads/iowa-co-op-keynote.pptx');
 
 await fs.mkdir(POWERPOINT_OUTPUT_DIR, { recursive: true });
+await fs.mkdir(path.dirname(downloadOutputPath), { recursive: true });
 
 const { datasets, manifest } = await generateChartAssets(CHART_OUTPUT_DIR);
 const pptx = new PptxGenJS();
@@ -47,9 +49,11 @@ slides.forEach((definition, index) => {
 });
 
 await pptx.writeFile({ fileName: outputPath, compression: true });
+await fs.copyFile(outputPath, downloadOutputPath);
 
 console.log(`Exported ${slides.length} slides to ${outputPath}.`);
 console.log(`Chart assets written to ${CHART_OUTPUT_DIR}.`);
+console.log(`Download copy written to ${downloadOutputPath}.`);
 
 function renderSlide(pptx, slide, definition, index) {
   switch (definition.layout) {
@@ -82,6 +86,9 @@ function renderSlide(pptx, slide, definition, index) {
       return;
     case 'timeline':
       renderTimelineSlide(pptx, slide, definition);
+      return;
+    case 'author-profile':
+      renderAuthorProfileSlide(pptx, slide, definition);
       return;
     case 'closing':
       renderClosingSlide(pptx, slide, definition);
@@ -525,6 +532,165 @@ function renderClosingSlide(pptx, slide, definition) {
   }
 }
 
+function renderAuthorProfileSlide(pptx, slide, definition) {
+  const tone = COLORS[definition.tone];
+  const profile = definition.authorProfile;
+
+  if (!profile) {
+    renderClosingSlide(pptx, slide, definition);
+    return;
+  }
+
+  addTitleBlock(slide, definition, {
+    titleY: 0.98,
+    titleW: 8.5,
+    subtitleY: 1.7,
+    subtitleW: 8.4,
+    titleFontSize: 25,
+    subtitleFontSize: 14.4,
+  });
+
+  addPanel(slide, { x: 0.71, y: 2.0, w: 5.28, h: 5.02, tone: definition.tone });
+  slide.addShape(SHAPE.ellipse, {
+    x: 2.03,
+    y: 2.22,
+    w: 2.64,
+    h: 2.64,
+    fill: { color: 'FFFFFF', transparency: 2 },
+    line: { color: 'DCE6DF', width: 1 },
+    shadow: { type: 'outer', color: '20352A', opacity: 0.14, blur: 2, offset: 2, angle: 45 },
+  });
+  slide.addImage({
+    path: resolveDeckAssetPath(profile.photoSrc),
+    x: 2.15,
+    y: 2.34,
+    w: 2.4,
+    h: 2.4,
+    rounding: true,
+  });
+  slide.addText(profile.role.toUpperCase(), {
+    x: 1.07,
+    y: 4.9,
+    w: 4.6,
+    h: 0.2,
+    fontFace: FONT.body,
+    fontSize: 9.6,
+    bold: true,
+    color: '2F58D8',
+    charSpace: 1.8,
+    align: 'center',
+    margin: 0,
+  });
+  slide.addText(profile.name, {
+    x: 0.95,
+    y: 5.15,
+    w: 4.8,
+    h: 0.42,
+    fontFace: FONT.heading,
+    fontSize: 22,
+    bold: true,
+    color: tone.text,
+    align: 'center',
+    margin: 0,
+  });
+  slide.addText(profile.summary, {
+    x: 2.58,
+    y: 5.56,
+    w: 2.92,
+    h: 0.67,
+    fontFace: FONT.body,
+    fontSize: 10.4,
+    color: tone.muted,
+    margin: 0,
+    fit: 'shrink',
+  });
+
+  slide.addShape(SHAPE.roundRect, {
+    x: 0.92,
+    y: 5.2,
+    w: 1.52,
+    h: 1.52,
+    fill: { color: 'FFFFFF' },
+    line: { color: 'D7E0DA', width: 1 },
+    radius: 0.08,
+  });
+  slide.addImage({
+    path: resolveDeckAssetPath(profile.qrSrc),
+    x: 1.04,
+    y: 5.32,
+    w: 1.28,
+    h: 1.28,
+  });
+  slide.addText('CONNECT', {
+    x: 2.52,
+    y: 6.29,
+    w: 2.25,
+    h: 0.18,
+    fontFace: FONT.body,
+    fontSize: 10,
+    bold: true,
+    color: '2F58D8',
+    charSpace: 1.6,
+    margin: 0,
+  });
+  slide.addText(profile.qrLabel, {
+    x: 2.52,
+    y: 6.44,
+    w: 2.1,
+    h: 0.28,
+    fontFace: FONT.body,
+    fontSize: 12.2,
+    bold: true,
+    color: tone.text,
+    margin: 0,
+    fit: 'shrink',
+  });
+
+  const highlightPalette = {
+    sky: { fill: 'E7F0FF', line: 'D4E0F5' },
+    lavender: { fill: 'F2EAF9', line: 'E4D7F2' },
+    sage: { fill: 'E6F3EA', line: 'D0E7D7' },
+  };
+
+  profile.highlights.forEach((highlight, highlightIndex) => {
+    const palette = highlightPalette[highlight.accent];
+    const y = [2.28, 3.9, 5.59][highlightIndex] ?? 2.28 + highlightIndex * 1.62;
+
+    slide.addShape(SHAPE.roundRect, {
+      x: 6.42,
+      y,
+      w: 5.85,
+      h: 1.3,
+      fill: { color: palette.fill },
+      line: { color: palette.line, width: 1 },
+      radius: 0.08,
+    });
+    slide.addText(highlight.title, {
+      x: 6.68,
+      y: y + 0.22,
+      w: 5.25,
+      h: 0.24,
+      fontFace: FONT.body,
+      fontSize: 16,
+      bold: true,
+      color: tone.text,
+      margin: 0,
+      fit: 'shrink',
+    });
+    slide.addText(highlight.detail, {
+      x: 6.68,
+      y: y + 0.62,
+      w: 5.1,
+      h: 0.42,
+      fontFace: FONT.body,
+      fontSize: 11.4,
+      color: '425447',
+      margin: 0,
+      fit: 'shrink',
+    });
+  });
+}
+
 function renderAnalyticsSlide(pptx, slide, definition, manifest) {
   const storyId = definition.chartStoryId;
   const config = storyVisualConfigs[storyId];
@@ -533,21 +699,26 @@ function renderAnalyticsSlide(pptx, slide, definition, manifest) {
   const compactMode = definition.analyticsMode === 'compact';
   const storyBullets = getSlideWhatMattersBullets(definition);
 
+  if (compactMode && chartPaths.length === 2) {
+    renderCompactStoryAnalyticsSlide(slide, definition, chartPaths, storyBullets, config);
+    return;
+  }
+
   addTitleBlock(slide, definition, {
-    titleY: compactMode ? 0.68 : 0.72,
-    titleW: compactMode ? 8.4 : 8.2,
-    subtitleY: compactMode ? 1.36 : 1.45,
-    subtitleW: compactMode ? 8.3 : 8.1,
-    titleFontSize: compactMode ? 25 : 24,
-    subtitleFontSize: compactMode ? 14.6 : 14,
+    titleY: 0.72,
+    titleW: 8.2,
+    subtitleY: 1.45,
+    subtitleW: 8.1,
+    titleFontSize: 24,
+    subtitleFontSize: 14,
   });
 
-  const chartWidth = compactMode ? 4.28 : 3.95;
-  const chartHeight = compactMode ? 2.16 : panels.length > 2 ? 1.65 : 1.84;
-  const leftX = compactMode ? 0.32 : 0.6;
-  const secondColumnX = compactMode ? 4.68 : 4.8;
-  const topY = compactMode ? 1.94 : 2.2;
-  const rowGap = compactMode ? 0.14 : 0.18;
+  const chartWidth = 3.95;
+  const chartHeight = panels.length > 2 ? 1.65 : 1.84;
+  const leftX = 0.6;
+  const secondColumnX = 4.8;
+  const topY = 2.2;
+  const rowGap = 0.18;
 
   chartPaths.forEach((chartPath, chartIndex) => {
     const column = chartIndex % 2;
@@ -563,53 +734,6 @@ function renderAnalyticsSlide(pptx, slide, definition, manifest) {
 
     slide.addImage({ path: chartPath, x, y, w: chartWidth, h: chartHeight });
   });
-
-  if (compactMode) {
-    addPanel(slide, { x: 9.08, y: 1.76, w: 3.06, h: 3.88, tone: definition.tone });
-    slide.addText('What matters', {
-      x: 9.31,
-      y: 1.99,
-      w: 2.52,
-      h: 0.22,
-      fontFace: FONT.body,
-      fontSize: 10,
-      bold: true,
-      color: COLORS[definition.tone].accent,
-      charSpace: 1.4,
-      margin: 0,
-    });
-    slide.addText('Story readout', {
-      x: 9.31,
-      y: 2.25,
-      w: 2.52,
-      h: 0.26,
-      fontFace: FONT.body,
-      fontSize: 15.5,
-      bold: true,
-      color: COLORS[definition.tone].text,
-      margin: 0,
-    });
-    addBulletList(slide, storyBullets, {
-      x: 9.31,
-      y: 2.67,
-      w: 2.55,
-      lineH: 0.59,
-      tone: definition.tone,
-      fontSize: 11.2,
-    });
-    slide.addText(config.sourceLabel, {
-      x: 9.31,
-      y: 5.02,
-      w: 2.58,
-      h: 0.42,
-      fontFace: FONT.body,
-      fontSize: 10.2,
-      color: COLORS[definition.tone].muted,
-      margin: 0,
-      fit: 'shrink',
-    });
-    return;
-  }
 
   addPanel(slide, { x: 9.1, y: 1.85, w: 3.62, h: 5.15, tone: definition.tone });
   slide.addText('Story readout', {
@@ -688,6 +812,86 @@ function renderAnalyticsSlide(pptx, slide, definition, manifest) {
   });
 }
 
+function renderCompactStoryAnalyticsSlide(slide, definition, chartPaths, storyBullets, config) {
+  const tone = COLORS[definition.tone];
+
+  slide.addText(definition.title, {
+    x: 0.8,
+    y: 0.68,
+    w: 4.45,
+    h: 1.56,
+    fontFace: FONT.heading,
+    fontSize: 25,
+    bold: true,
+    color: tone.text,
+    margin: 0,
+    fit: 'shrink',
+  });
+
+  if (definition.subtitle) {
+    slide.addText(definition.subtitle, {
+      x: 1.16,
+      y: 2.06,
+      w: 3.92,
+      h: 1.16,
+      fontFace: FONT.body,
+      fontSize: 18.8,
+      color: tone.muted,
+      margin: 0,
+      fit: 'shrink',
+    });
+  }
+
+  addPanel(slide, { x: 0.84, y: 3.87, w: 4.52, h: 3.39, tone: definition.tone });
+  slide.addText('What matters', {
+    x: 1.16,
+    y: 4.03,
+    w: 2.52,
+    h: 0.22,
+    fontFace: FONT.body,
+    fontSize: 10,
+    bold: true,
+    color: tone.accent,
+    charSpace: 1.4,
+    margin: 0,
+  });
+  slide.addText('Story readout', {
+    x: 1.16,
+    y: 4.29,
+    w: 2.52,
+    h: 0.26,
+    fontFace: FONT.body,
+    fontSize: 15.5,
+    bold: true,
+    color: tone.text,
+    margin: 0,
+  });
+  addBulletList(slide, storyBullets.slice(0, 3), {
+    x: 1.07,
+    y: 4.61,
+    w: 4.1,
+    lineH: 0.805,
+    tone: definition.tone,
+    fontSize: 14,
+    bulletSize: 0.16,
+    bulletTextOffset: 0.26,
+  });
+  slide.addText(config.sourceLabel, {
+    x: 1.39,
+    y: 6.9,
+    w: 3.26,
+    h: 0.42,
+    fontFace: FONT.body,
+    fontSize: 10.2,
+    color: tone.muted,
+    margin: 0,
+    fit: 'shrink',
+  });
+
+  slide.addImage({ path: chartPaths[0], x: 5.29, y: 0.24, w: 6.63, h: 3.35 });
+  slide.addImage({ path: chartPaths[1], x: 6.18, y: 3.87, w: 6.63, h: 3.35 });
+}
+
 function addTitleBlock(slide, definition, options) {
   const tone = COLORS[definition.tone];
   slide.addText(definition.title, {
@@ -735,18 +939,20 @@ function addPanel(slide, options) {
 function addBulletList(slide, bullets, options) {
   bullets.forEach((bullet, bulletIndex) => {
     const y = options.y + bulletIndex * options.lineH;
+    const bulletSize = options.bulletSize ?? 0.12;
+    const bulletTextOffset = options.bulletTextOffset ?? 0.22;
     slide.addShape(SHAPE.ellipse, {
       x: options.x,
       y: y + 0.13,
-      w: 0.12,
-      h: 0.12,
+      w: bulletSize,
+      h: bulletSize,
       fill: { color: COLORS[options.tone].accent },
       line: { color: COLORS[options.tone].accent, transparency: 100 },
     });
     slide.addText(bullet, {
-      x: options.x + 0.22,
+      x: options.x + bulletTextOffset,
       y,
-      w: options.w - 0.22,
+      w: options.w - bulletTextOffset,
       h: options.lineH - 0.06,
       fontFace: FONT.body,
       fontSize: options.fontSize ?? 12.5,
@@ -771,6 +977,14 @@ function addCompactList(slide, items, options) {
       fit: 'shrink',
     });
   });
+}
+
+function resolveDeckAssetPath(assetPath) {
+  if (assetPath.startsWith('/')) {
+    return path.resolve(process.cwd(), 'public', assetPath.slice(1));
+  }
+
+  return path.resolve(process.cwd(), assetPath);
 }
 
 function formatThresholdLabel(threshold) {

@@ -1,6 +1,7 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { deckSignals, type SlideDefinition } from '../content/deck';
 import { AnalyticsSlide } from './AnalyticsSlide';
+import { AuthorProfileSlide } from './AuthorProfileSlide';
 import { SlideFrame } from './SlideFrame';
 
 interface SlideRendererProps {
@@ -165,6 +166,8 @@ function renderSlide(slide: SlideDefinition) {
           </div>
         </div>
       );
+    case 'author-profile':
+      return <AuthorProfileSlide slide={slide} />;
     case 'closing':
       return (
         <div className="closing-layout">

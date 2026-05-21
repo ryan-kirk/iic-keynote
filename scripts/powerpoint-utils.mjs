@@ -148,6 +148,17 @@ export function buildSpeakerNotes(slide, index, total, datasets) {
     slide.timeline.forEach((item) => lines.push(`- ${item.period}: ${item.title}. ${item.detail}`));
   }
 
+  if (slide.authorProfile) {
+    lines.push('', `Author: ${slide.authorProfile.name}`);
+    lines.push(`Role: ${slide.authorProfile.role}`);
+    lines.push(`Summary: ${slide.authorProfile.summary}`);
+    lines.push('Highlights:');
+    slide.authorProfile.highlights.forEach((highlight) => {
+      lines.push(`- ${highlight.title}: ${highlight.detail}`);
+    });
+    lines.push(`Contact prompt: ${slide.authorProfile.qrLabel}. ${slide.authorProfile.qrCaption}`);
+  }
+
   if (slide.quote) {
     lines.push('', `Quote: ${slide.quote}`);
     if (slide.quoteAttribution) {
