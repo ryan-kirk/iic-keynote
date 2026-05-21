@@ -174,9 +174,9 @@ function MetricPanel({
   }
 
   const domain = resolveDomain(points, thresholds, panel.minValue, panel.maxValue);
-  const chartHeight = compact ? 240 : 176;
-  const chartWidth = compact ? 420 : 320;
-  const padding = compact ? { top: 20, right: 14, bottom: 22, left: 14 } : { top: 18, right: 12, bottom: 18, left: 12 };
+  const chartHeight = compact ? 220 : 176;
+  const chartWidth = compact ? 640 : 320;
+  const padding = compact ? { top: 14, right: 10, bottom: 16, left: 10 } : { top: 18, right: 12, bottom: 18, left: 12 };
   const { minDate, maxDate } = resolveChartDateDomain(points, records, comparisonWindows);
   const panelSourceTypes = storyId ? getSeriesSourceTypes(storyId, panel.series.map((series) => series.metricKey)) : [];
   const showZeroAxis = domain.min <= 0 && domain.max >= 0;

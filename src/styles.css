@@ -362,13 +362,13 @@ blockquote {
 }
 
 .analytics-layout-story {
-  grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+  grid-template-columns: minmax(260px, 0.54fr) minmax(0, 1.46fr);
   grid-template-areas:
     'header header'
     'story charts';
   grid-template-rows: auto 1fr;
-  column-gap: 28px;
-  row-gap: 18px;
+  column-gap: 18px;
+  row-gap: 16px;
   align-items: start;
 }
 
@@ -379,8 +379,7 @@ blockquote {
 .analytics-main-story {
   grid-area: charts;
   min-width: 0;
-  display: flex;
-  justify-content: flex-end;
+  display: block;
 }
 
 .analytics-grid {
@@ -397,15 +396,17 @@ blockquote {
 }
 
 .analytics-header-block-story h1 {
-  max-width: 1080px;
-  font-size: clamp(3rem, 4.9vw, 5.15rem);
+  max-width: none;
+  width: 100%;
+  font-size: clamp(3rem, 5.25vw, 5.35rem);
   line-height: 0.94;
 }
 
 .analytics-header-block-story .lede.narrow {
-  max-width: 980px;
+  max-width: none;
+  width: 100%;
   margin-top: 16px;
-  font-size: clamp(1.2rem, 1.75vw, 1.7rem);
+  font-size: clamp(1.2rem, 1.8vw, 1.7rem);
   line-height: 1.26;
 }
 
@@ -422,11 +423,12 @@ blockquote {
 .analytics-sidebar-story {
   grid-area: story;
   align-self: end;
+  justify-self: end;
   margin-top: 0;
 }
 
 .analytics-story-card {
-  width: min(100%, 420px);
+  width: min(100%, 392px);
   padding: 22px 24px 18px;
   border-radius: 34px;
   background: rgba(255, 255, 255, 0.13);
@@ -462,10 +464,10 @@ blockquote {
 }
 
 .analytics-story-stack {
-  width: min(100%, 820px);
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .analytics-card h2,
@@ -644,8 +646,8 @@ blockquote {
 }
 
 .chart-card-compact {
-  padding: 18px 22px 18px;
-  gap: 14px;
+  padding: 16px 18px 16px;
+  gap: 12px;
   border-radius: 30px;
   background: rgba(255, 255, 255, 0.115);
   border-color: rgba(255, 255, 255, 0.15);
@@ -697,7 +699,7 @@ blockquote {
 }
 
 .chart-legend-row-compact {
-  gap: 12px 22px;
+  gap: 10px 18px;
 }
 
 .chart-legend-item {
@@ -734,7 +736,9 @@ blockquote {
 }
 
 .chart-card-compact .metric-chart {
-  height: 214px;
+  display: block;
+  height: auto;
+  aspect-ratio: 640 / 220;
 }
 
 .chart-shell {
@@ -1062,6 +1066,11 @@ blockquote {
 
   .analytics-story-card {
     width: 100%;
+  }
+
+  .chart-card-compact .metric-chart {
+    height: 214px;
+    aspect-ratio: auto;
   }
 
   .author-layout {
