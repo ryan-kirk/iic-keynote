@@ -1,6 +1,5 @@
 import type { SlideDefinition } from '../content/deck';
 import {
-  formatMetricValue,
   getStoryDataset,
   getSeriesSourceTypes,
   storyVisualConfigs,
@@ -10,22 +9,22 @@ import {
   type StoryPanelConfig,
   type ThresholdRule,
 } from '../data/storyCharts';
+import {
+  buildPanelSeries,
+  buildPath,
+  formatAxisDate,
+  formatPanelValue,
+  formatSourceTypeLabel,
+  formatThreshold,
+  getPanelThresholds,
+  resolveDomain,
+  scaleDate,
+  scaleValue,
+} from '../data/storyChartPresentation';
+import { formatMetricValue } from '../data/storyChartShared';
 
 interface AnalyticsSlideProps {
   slide: SlideDefinition;
-}
-
-interface PanelPoint {
-  date: string;
-  value: number;
-  timeGrain: string;
-}
-
-interface PanelSeries {
-  metricKey: string;
-  label: string;
-  color: string;
-  points: PanelPoint[];
 }
 
 export function AnalyticsSlide({ slide }: AnalyticsSlideProps) {
@@ -35,73 +34,95 @@ export function AnalyticsSlide({ slide }: AnalyticsSlideProps) {
 
   const dataset = getStoryDataset(slide.chartStoryId);
   const config = storyVisualConfigs[slide.chartStoryId];
+  const panels = slide.chartPanelIds?.length
+    ? config.panels.filter((panel) => slide.chartPanelIds?.includes(panel.id))
+    : config.panels;
+  const compactMode = slide.analyticsMode === 'compact';
 
   return (
-    <div className="analytics-layout">
+    <div className={`analytics-layout${compactMode ? ' analytics-layout-compact' : ''}`}>
       <div className="analytics-main">
         <h1>{slide.title}</h1>
         {slide.subtitle ? <p className="lede narrow">{slide.subtitle}</p> : null}
 
         <div className="analytics-grid">
-          {config.panels.map((panel) => (
+          {panels.map((panel) => (
             <MetricPanel
               storyId={slide.chartStoryId}
               key={panel.id}
               panel={panel}
               records={dataset.records}
-              thresholds={dataset.thresholds.filter((threshold) =>
-                panel.series.some((series) => series.metricKey === threshold.metricKey),
-              )}
+              thresholds={getPanelThresholds(panel, dataset.thresholds)}
               comparisonWindows={dataset.comparisonWindows}
+              compact={compactMode}
             />
           ))}
         </div>
       </div>
 
-      <aside className="analytics-sidebar">
-        <article className="analytics-card">
-          <span className="analytics-card-kicker">What the chart says</span>
-          <h2>Story readout</h2>
-          <ul className="analytics-list">
-            {slide.bullets?.map((bullet) => <li key={bullet}>{bullet}</li>)}
-          </ul>
-        </article>
+      {compactMode ? (
+        <aside className="analytics-sidebar analytics-sidebar-compact">
+          <article className="analytics-card">
+            <span className="analytics-card-kicker">What matters</span>
+            <h2>Story readout</h2>
+            <ul className="analytics-list">
+              {slide.bullets?.map((bullet) => <li key={bullet}>{bullet}</li>)}
+            </ul>
+            <div className="source-pill-row compact-source-row">
+              {dataset.sourceTypes.map((sourceType) => (
+                <span className={`source-pill source-${sourceType}`} key={sourceType}>
+                  {formatSourceTypeLabel(sourceType)}
+                </span>
+              ))}
+            </div>
+          </article>
+        </aside>
+      ) : (
+        <aside className="analytics-sidebar">
+          <article className="analytics-card">
+            <span className="analytics-card-kicker">What the chart says</span>
+            <h2>Story readout</h2>
+            <ul className="analytics-list">
+              {slide.bullets?.map((bullet) => <li key={bullet}>{bullet}</li>)}
+            </ul>
+          </article>
 
-        <article className="analytics-card">
-          <span className="analytics-card-kicker">Thresholds</span>
-          <h2>What moves this from noise to action</h2>
-          <div className="threshold-stack">
-            {dataset.thresholds.map((threshold) => (
-              <div className={`threshold-row severity-${threshold.severity}`} key={threshold.id}>
-                <strong>{formatThreshold(threshold)}</strong>
-                <p>{threshold.meaning}</p>
-              </div>
-            ))}
-          </div>
-        </article>
+          <article className="analytics-card">
+            <span className="analytics-card-kicker">Thresholds</span>
+            <h2>What moves this from noise to action</h2>
+            <div className="threshold-stack">
+              {dataset.thresholds.map((threshold) => (
+                <div className={`threshold-row severity-${threshold.severity}`} key={threshold.id}>
+                  <strong>{formatThreshold(threshold)}</strong>
+                  <p>{threshold.meaning}</p>
+                </div>
+              ))}
+            </div>
+          </article>
 
-        <article className="analytics-card">
-          <span className="analytics-card-kicker">Annotations</span>
-          <h2>Context kept visible</h2>
-          <div className="annotation-stack">
-            {dataset.annotations.slice(0, 4).map((annotation) => (
-              <AnnotationRow annotation={annotation} key={`${annotation.date}-${annotation.label}`} />
-            ))}
-          </div>
-        </article>
+          <article className="analytics-card">
+            <span className="analytics-card-kicker">Annotations</span>
+            <h2>Context kept visible</h2>
+            <div className="annotation-stack">
+              {dataset.annotations.slice(0, 4).map((annotation) => (
+                <AnnotationRow annotation={annotation} key={`${annotation.date}-${annotation.label}`} />
+              ))}
+            </div>
+          </article>
 
-        <article className="analytics-card">
-          <span className="analytics-card-kicker">Data mix</span>
-          <h2>{config.sourceLabel}</h2>
-          <div className="source-pill-row">
-            {dataset.sourceTypes.map((sourceType) => (
-              <span className={`source-pill source-${sourceType}`} key={sourceType}>
-                {formatSourceTypeLabel(sourceType)}
-              </span>
-            ))}
-          </div>
-        </article>
-      </aside>
+          <article className="analytics-card">
+            <span className="analytics-card-kicker">Data mix</span>
+            <h2>{config.sourceLabel}</h2>
+            <div className="source-pill-row">
+              {dataset.sourceTypes.map((sourceType) => (
+                <span className={`source-pill source-${sourceType}`} key={sourceType}>
+                  {formatSourceTypeLabel(sourceType)}
+                </span>
+              ))}
+            </div>
+          </article>
+        </aside>
+      )}
     </div>
   );
 }
@@ -112,12 +133,14 @@ function MetricPanel({
   records,
   thresholds,
   comparisonWindows,
+  compact,
 }: {
   storyId: SlideDefinition['chartStoryId'];
   panel: StoryPanelConfig;
   records: ChartRecord[];
   thresholds: ThresholdRule[];
   comparisonWindows: ComparisonWindow[];
+  compact?: boolean;
 }) {
   const panelSeries = buildPanelSeries(panel, records);
   const points = panelSeries.flatMap((series) => series.points);
@@ -128,7 +151,7 @@ function MetricPanel({
 
   const domain = resolveDomain(points, thresholds, panel.minValue, panel.maxValue);
   const uniqueDates = [...new Set(points.map((point) => point.date))].sort();
-  const chartHeight = 176;
+  const chartHeight = compact ? 196 : 176;
   const chartWidth = 320;
   const padding = { top: 18, right: 12, bottom: 18, left: 12 };
   const minDate = uniqueDates[0];
@@ -142,7 +165,7 @@ function MetricPanel({
         <div>
           <span className="analytics-card-kicker">{panel.eyebrow}</span>
           <h2>{panel.title}</h2>
-          <p className="chart-description">{panel.description}</p>
+          {!compact ? <p className="chart-description">{panel.description}</p> : null}
           <div className="panel-source-row">
             {panelSourceTypes.map((sourceType) => (
               <span className={`source-pill source-${sourceType}`} key={`${panel.id}-${sourceType}`}>
@@ -261,134 +284,4 @@ function AnnotationRow({ annotation }: { annotation: StoryAnnotation }) {
       </div>
     </div>
   );
-}
-
-function buildPanelSeries(panel: StoryPanelConfig, records: ChartRecord[]): PanelSeries[] {
-  return panel.series.map((series) => {
-    const seriesRecords = records
-      .filter((record) => record.metricKey === series.metricKey)
-      .sort((left, right) => left.date.localeCompare(right.date));
-
-    const baseValue = panel.displayMode === 'baseline-index' ? seriesRecords[0]?.value ?? 1 : 1;
-
-    return {
-      metricKey: series.metricKey,
-      label: series.label,
-      color: series.color,
-      points: seriesRecords.map((record) => ({
-        date: record.date,
-        timeGrain: record.timeGrain,
-        value:
-          panel.displayMode === 'baseline-index'
-            ? Number.parseFloat(((record.value / baseValue) * 100).toFixed(2))
-            : record.value,
-      })),
-    };
-  });
-}
-
-function resolveDomain(
-  points: PanelPoint[],
-  thresholds: ThresholdRule[],
-  minValue?: number,
-  maxValue?: number,
-) {
-  const pointValues = points.map((point) => point.value);
-  const thresholdValues = thresholds.map((threshold) => threshold.value);
-  const values = [...pointValues, ...thresholdValues];
-  const rawMin = minValue ?? Math.min(...values);
-  const rawMax = maxValue ?? Math.max(...values);
-
-  if (rawMin === rawMax) {
-    return { min: rawMin - 1, max: rawMax + 1 };
-  }
-
-  return { min: rawMin, max: rawMax };
-}
-
-function buildPath(
-  points: PanelPoint[],
-  minValue: number,
-  maxValue: number,
-  minDate: string,
-  maxDate: string,
-  chartWidth: number,
-  chartHeight: number,
-  padding: { top: number; right: number; bottom: number; left: number },
-) {
-  return points
-    .map((point, index) => {
-      const x = scaleDate(point.date, minDate, maxDate, chartWidth, padding.left, padding.right);
-      const y = scaleValue(point.value, minValue, maxValue, chartHeight, padding.top, padding.bottom);
-      return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
-    })
-    .join(' ');
-}
-
-function scaleDate(
-  value: string,
-  minDate: string,
-  maxDate: string,
-  chartWidth: number,
-  leftPadding: number,
-  rightPadding: number,
-) {
-  const min = dateToNumber(minDate);
-  const max = dateToNumber(maxDate);
-
-  if (min === max) {
-    return chartWidth / 2;
-  }
-
-  const ratio = (dateToNumber(value) - min) / (max - min);
-  return leftPadding + ratio * (chartWidth - leftPadding - rightPadding);
-}
-
-function scaleValue(
-  value: number,
-  minValue: number,
-  maxValue: number,
-  chartHeight: number,
-  topPadding: number,
-  bottomPadding: number,
-) {
-  const usableHeight = chartHeight - topPadding - bottomPadding;
-  const ratio = (value - minValue) / (maxValue - minValue || 1);
-  return chartHeight - bottomPadding - ratio * usableHeight;
-}
-
-function dateToNumber(value: string) {
-  return new Date(`${value}T00:00:00`).getTime();
-}
-
-function formatAxisDate(value: string) {
-  return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' }).format(new Date(`${value}T00:00:00`));
-}
-
-function formatThreshold(threshold: ThresholdRule) {
-  return `${threshold.severity}: ${threshold.operator} ${formatMetricValue(threshold.metricKey, threshold.value)}`;
-}
-
-function formatPanelValue(metricKey: string, value: number, displayMode?: StoryPanelConfig['displayMode']) {
-  if (displayMode === 'baseline-index') {
-    return `${value.toFixed(0)} index`;
-  }
-
-  return formatMetricValue(metricKey, value);
-}
-
-function formatSourceTypeLabel(sourceType: string) {
-  if (sourceType === 'illustrative') {
-    return 'Synthetic';
-  }
-
-  if (sourceType === 'proxy') {
-    return 'Proxy';
-  }
-
-  if (sourceType === 'real') {
-    return 'Real';
-  }
-
-  return sourceType;
 }

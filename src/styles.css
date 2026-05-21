@@ -321,6 +321,11 @@ blockquote {
   align-items: start;
 }
 
+.analytics-layout-compact {
+  grid-template-columns: minmax(0, 1.9fr) 300px;
+  gap: 16px;
+}
+
 .analytics-main {
   min-width: 0;
 }
@@ -329,9 +334,17 @@ blockquote {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.analytics-layout-compact .analytics-grid {
+  gap: 14px;
+}
+
 .analytics-sidebar {
   display: grid;
   gap: 16px;
+}
+
+.analytics-sidebar-compact {
+  align-content: start;
 }
 
 .analytics-card h2,
@@ -359,6 +372,10 @@ blockquote {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.analytics-layout-compact .chart-card {
+  gap: 10px;
 }
 
 .chart-card-header {
@@ -410,6 +427,10 @@ blockquote {
 .metric-chart {
   width: 100%;
   height: 188px;
+}
+
+.analytics-layout-compact .metric-chart {
+  height: 208px;
 }
 
 .chart-shell {
@@ -523,6 +544,10 @@ blockquote {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 14px;
+}
+
+.compact-source-row {
+  margin-top: 18px;
 }
 
 .source-pill {
@@ -710,6 +735,10 @@ blockquote {
   }
 
   .analytics-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .analytics-sidebar-compact {
     grid-template-columns: 1fr;
   }
 }
