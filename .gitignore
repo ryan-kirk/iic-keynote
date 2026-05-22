@@ -1,3 +1,6 @@
 examples/*
 artifacts/*
 *.[mM][dD]
+!README.md
+!REFERENCES.md
+!author/Bio.md
